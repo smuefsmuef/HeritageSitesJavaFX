@@ -1,3 +1,8 @@
-.button{
+GridPane {
+-fx-background-color: #0000ff;
+}
+
+VBox {
+    -fx-background-color: #9cc;
 
 }
