@@ -1,5 +1,7 @@
+
 GridPane {
 -fx-background-color: #0000ff;
+    -fx-max-height: 20px;
 }
 
 VBox {

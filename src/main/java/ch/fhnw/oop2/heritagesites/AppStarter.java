@@ -1,14 +1,11 @@
 package ch.fhnw.oop2.heritagesites;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.PM;
-import ch.fhnw.oop2.heritagesites.views.UnitedUI;
+import ch.fhnw.oop2.heritagesites.views.BorderUI;
+import ch.fhnw.oop2.heritagesites.views.SplitUI;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class AppStarter extends Application {
@@ -27,7 +24,9 @@ public class AppStarter extends Application {
         PM model = new PM();
 
         // Splitpane --> als start
-        Parent rootPanel = new UnitedUI(model);
+        // todo evtl. sogar andere form (z.b borderpane) wählen für header, footer
+
+        Parent rootPanel = new BorderUI(model);
 
         String path = this.getClass().getResource("/data/style.css").toExternalForm();
         rootPanel.getStylesheets().add(path);

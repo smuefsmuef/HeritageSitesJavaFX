@@ -6,10 +6,12 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class UnitedUI extends SplitPane {
+public class SplitUI extends SplitPane {
     private final PM model;
 
-    public UnitedUI(PM model) {
+     private Label test;
+
+    public SplitUI(PM model) {
         this.model = model;
         initializeSelf();
         initializeControls();
@@ -24,6 +26,7 @@ public class UnitedUI extends SplitPane {
     }
 
     public void initializeControls() {
+        test = new Label("sdfsdfssd");
     }
 
     private void layoutControls() {
@@ -32,9 +35,12 @@ public class UnitedUI extends SplitPane {
         // links --> über neues UI lösen
         GridPane leftControl = new GridPane();
 
+
         // rechts --> über neues UI lösen
         VBox rightControl = new VBox(new Label("Right Control"));
         getItems().addAll(leftControl, rightControl);
+
+        getChildren().addAll(test);
 
     }
 
