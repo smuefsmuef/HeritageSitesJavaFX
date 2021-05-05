@@ -1,4 +1,5 @@
 
+
 GridPane {
 -fx-background-color: #0000ff;
     -fx-max-height: 20px;
@@ -6,5 +7,14 @@ GridPane {
 
 VBox {
     -fx-background-color: #9cc;
+
+}
+
+HBox {
+    -fx-background-color: #9cc;
+}
+
+.button {
+    -fx-background-color: pink;
 
 }
