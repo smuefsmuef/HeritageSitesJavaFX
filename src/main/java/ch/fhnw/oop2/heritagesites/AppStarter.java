@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class AppStarter extends Application {
 
     @Override
@@ -23,6 +24,9 @@ public class AppStarter extends Application {
         Scene scene = new Scene(rootPanel);
 
         primaryStage.titleProperty().bind(model.applicationTitleProperty());
+
+        primaryStage.setWidth(800);
+        primaryStage.setHeight(500);
 
         primaryStage.setScene(scene);
         primaryStage.show();

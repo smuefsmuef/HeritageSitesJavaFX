@@ -4,21 +4,77 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.swing.*;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
+// analog Gesamtresult
+// todo: file rcihtig einlesen
 
 public class PM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
-    private final StringProperty  spalte1      = new SimpleStringProperty();
-    private final StringProperty  spalte2   = new SimpleStringProperty();
 
-    private final ObservableList<PM> alleResultate = FXCollections.observableArrayList();
+  //  private static final String csv_file = "/data/heritage_sites.csv";
+   private static final String csv_file = "/data/text.txt";
+    private static final String DELIMITER = "";
 
+    private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
-
-
-    public ObservableList<PM> getAlleResultate() {
-        return alleResultate;
+    public PM() {
+      //  allSites.addAll(readFromFile()); // todo: fails here
+        System.out.println(getApplicationTitle());
     }
+
+
+    private List<HeritagePM> readFromFile() {
+        try (BufferedReader reader = getReader(csv_file)) {
+            return reader.lines()
+                    .skip(1)                                              // erste Zeile ist die Headerzeile; ueberspringen
+                    .map(line -> new HeritagePM(line.split(DELIMITER, 200))) // aus jeder Zeile ein Objekt machen
+                    .collect(Collectors.toList());                        // alles aufsammeln
+        } catch (IOException e) {
+            throw new IllegalStateException("failed");
+        }
+    }
+
+
+//    // recheck if needed
+//    public void save() {
+//        try (BufferedWriter writer = getWriter(FILE_NAME)) {
+//            writer.write("Das;ist;einTest");
+//            writer.newLine();
+//            allSites.stream()
+//                    .map(resultat -> resultat.infoAsLine(DELIMITER))
+//                    .forEach(line -> {
+//                        try {
+//                            writer.write(line);
+//                            writer.newLine();
+//                        } catch (IOException e) {
+//                            throw new IllegalStateException(e);
+//                        }
+//                    });
+//        } catch (IOException e) {
+//            throw new IllegalStateException("save failed");
+//        }
+//    }
+
+    private BufferedReader getReader(String fileName) {
+        InputStream inputStream = getClass().getResourceAsStream(fileName);  // damit kann man vom File lesen
+        InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); // lesen von Text-File
+        return new BufferedReader(reader);  // damit man zeilenweise lesen kann
+    }
+
+//    private BufferedWriter getWriter(String fileName) {
+//        try {
+//            String file = getClass().getResource(fileName).getFile();
+//            return new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8));
+//        } catch (IOException e) {
+//            throw new IllegalStateException("wrong file " + fileName);
+//        }
+//    }
 
 
     /// Getter & Setter
@@ -30,28 +86,10 @@ public class PM {
     public StringProperty applicationTitleProperty() {
         return applicationTitle;
     }
-    public void setApplicationTitle(String applicationTitle) {
-        this.applicationTitle.set(applicationTitle);
-    }
 
-    public String getSpalte1() {
-        return spalte1.get();
-    }
-    public StringProperty spalte1Property() {
-        return spalte1;
-    }
-    public void setSpalte1(String spalte1) {
-        this.spalte1.set(spalte1);
-    }
 
-    public String getSpalte2() {
-        return spalte2.get();
-    }
-    public StringProperty spalte2Property() {
-        return spalte2;
-    }
-    public void setSpalte2(String spalte2) {
-        this.spalte2.set(spalte2);
+    public ObservableList<HeritagePM> getAllSites() {
+        return allSites;
     }
 }
 
