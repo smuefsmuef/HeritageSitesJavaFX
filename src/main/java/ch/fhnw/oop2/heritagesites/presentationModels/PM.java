@@ -20,24 +20,24 @@ public class PM {
 
     public PM() throws FileNotFoundException {
         System.out.println(getApplicationTitle());
-        allSites.addAll(readFromFile()); // todo: fails here
+        allSites.addAll(readFromFile());
     }
 
 
-    private List<HeritagePM> readFromFile() { //file not found-exception
-
-        try (BufferedReader reader = getReader(csv_file)) { // Try/Catch Block
+    private List<HeritagePM> readFromFile() {
+        try (BufferedReader reader = getReader(csv_file)) { // get reader
             return reader
                     .lines()
-                    .skip(1)                                              // erste Zeile ist die Headerzeile; ueberspringen
-                    .map(line -> new HeritagePM(line.split(DELIMITER, 10))) // 10,  aus jeder Zeile ein Objekt machen
-                    .collect(Collectors.toList());                        // alles aufsammeln
+                    .skip(1) // skip first line, header
+                    .map(line -> new HeritagePM(line.split(DELIMITER, 10))) // 10,  transform each line into an obect
+                    .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new IllegalStateException("xdfdddddddddddddddd");
+            throw new IllegalStateException("no bueno - file not found");
         }
     }
 
-    private BufferedReader getReader(String fileName) throws FileNotFoundException { // https://www.baeldung.com/java-buffered-reader
+    // get file reader
+    private BufferedReader getReader(String fileName) throws FileNotFoundException {
         FileReader reader = new FileReader(fileName);
         return new BufferedReader(reader);
     }
@@ -77,7 +77,6 @@ public class PM {
 
     /// Getter & Setter
 
-    // app title, ok
     public String getApplicationTitle() {
         return applicationTitle.get();
     }

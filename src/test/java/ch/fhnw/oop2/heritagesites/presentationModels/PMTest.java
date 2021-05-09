@@ -13,7 +13,7 @@ class PMTest {
 
 
     @Test
-    void testHelloWorld(){
+    void testHelloWorld() {
         DemoClass demo = new DemoClass();
         assertEquals("Hello World", demo.helloWorld());
     }
@@ -32,8 +32,11 @@ class PMTest {
 
         //then
         assertTrue(resulate.size() > 1);
-      //  assertEquals("Aeugst am Albis"    , resulate.get(0).getCategory());
-        // assertEquals("GE-CH de l'étranger", resulate.get(resulate.size() - 1).getCategory());
+        assertEquals("Natural", resulate.get(0).getCategory());
+        assertEquals("Natural", resulate.get(resulate.size() - 1).getCategory());
+        assertEquals("154", resulate.get(0).getId());
+        assertEquals("Australia;;;;", resulate.get(0).getStates());
+        assertEquals("Great Barrier Reef", resulate.get(0).getSite());
     }
 
 //
