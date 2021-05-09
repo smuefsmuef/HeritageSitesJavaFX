@@ -19,10 +19,10 @@ public class BorderUI extends BorderPane {
     private final PM model;
     private SplitUI split;
 
-    private Label label;
     private Button bottomButton;
 
-    HBox hbox = addHBox();
+    HBox hbox = addHBoxTop();
+    HBox hboxBottom = addHBoxBottom();
 
 
     public BorderUI(PM model) {
@@ -32,26 +32,17 @@ public class BorderUI extends BorderPane {
     }
 
     private void initializeControls() {
-        label = new Label("top: save, add, delete");
-        bottomButton = new Button("bottom, maybe a counter, visited heritages, visited countries");
         split = new SplitUI(model);
     }
 
     private void layoutControls() {
-        label.setMaxWidth(Double.MAX_VALUE);
-        bottomButton.setMaxWidth(Double.MAX_VALUE);
-
-        setMargin(label, new Insets(15));
-        setMargin(bottomButton, new Insets(15));
-
         setTop(hbox);
         setCenter(split);
-        setBottom(bottomButton);
-
+        setBottom(hboxBottom);
     }
 
 
-    public HBox addHBox() {
+    public HBox addHBoxTop() {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15));
         hbox.setSpacing(10);
@@ -66,6 +57,21 @@ public class BorderUI extends BorderPane {
         saveButton.setPrefSize(100, 20);
 
         hbox.getChildren().addAll(addNewButton, deleteButton,saveButton );
+
+        return hbox;
+    }
+
+    public HBox addHBoxBottom() {
+        HBox hbox = new HBox();
+        hbox.setPadding(new Insets(15));
+        hbox.setSpacing(10);
+
+        bottomButton = new Button("bottom, counter, visited heritages, visited countries");
+        bottomButton.setMaxWidth(Double.MAX_VALUE);
+        // bottomButton.setPrefSize(500, 20);
+
+        setMargin(bottomButton, new Insets(15));
+        hbox.getChildren().addAll(bottomButton);
 
         return hbox;
     }

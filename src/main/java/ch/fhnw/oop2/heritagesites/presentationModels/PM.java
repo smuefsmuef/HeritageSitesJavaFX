@@ -7,43 +7,47 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-// analog Gesamtresult
-// todo: file rcihtig einlesen
 
 public class PM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
 
-  //  private static final String csv_file = "/data/heritage_sites.csv";
-   private static final String csv_file = "/data/text.txt";
-    private static final String DELIMITER = "";
+    //  private static final String csv_file = "/data/heritage_sites.csv";
+   //  private static final String csv_file = "resources/data/test.txt";
+    private static final String csv_file = "src/main/resources/data/test.txt";
+    private static final String DELIMITER = "\t";
 
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
-    public PM() {
-      //  allSites.addAll(readFromFile()); // todo: fails here
+    public PM() throws FileNotFoundException {
         System.out.println(getApplicationTitle());
+        allSites.addAll(readFromFile()); // todo: fails here
     }
 
 
-    private List<HeritagePM> readFromFile() {
-        try (BufferedReader reader = getReader(csv_file)) {
-            return reader.lines()
+    private List<HeritagePM> readFromFile() { //file not found-exception
+
+        try (BufferedReader reader = getReader(csv_file)) { // Try/Catch Block
+            return reader
+                    .lines()
                     .skip(1)                                              // erste Zeile ist die Headerzeile; ueberspringen
-                    .map(line -> new HeritagePM(line.split(DELIMITER, 200))) // aus jeder Zeile ein Objekt machen
+                    .map(line -> new HeritagePM(line.split(DELIMITER, 10))) // 10,  aus jeder Zeile ein Objekt machen
                     .collect(Collectors.toList());                        // alles aufsammeln
         } catch (IOException e) {
-            throw new IllegalStateException("failed");
+            throw new IllegalStateException("xdfdddddddddddddddd");
         }
     }
 
+    private BufferedReader getReader(String fileName) throws FileNotFoundException { // https://www.baeldung.com/java-buffered-reader
+        FileReader reader = new FileReader(fileName);
+        return new BufferedReader(reader);
+    }
 
-//    // recheck if needed
+
+//    // add new entry
 //    public void save() {
-//        try (BufferedWriter writer = getWriter(FILE_NAME)) {
+//        try (BufferedWriter writer = getWriter(csv_file)) {
 //            writer.write("Das;ist;einTest");
 //            writer.newLine();
 //            allSites.stream()
@@ -61,12 +65,8 @@ public class PM {
 //        }
 //    }
 
-    private BufferedReader getReader(String fileName) {
-        InputStream inputStream = getClass().getResourceAsStream(fileName);  // damit kann man vom File lesen
-        InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8); // lesen von Text-File
-        return new BufferedReader(reader);  // damit man zeilenweise lesen kann
-    }
 
+//
 //    private BufferedWriter getWriter(String fileName) {
 //        try {
 //            String file = getClass().getResource(fileName).getFile();
@@ -83,10 +83,10 @@ public class PM {
     public String getApplicationTitle() {
         return applicationTitle.get();
     }
+
     public StringProperty applicationTitleProperty() {
         return applicationTitle;
     }
-
 
     public ObservableList<HeritagePM> getAllSites() {
         return allSites;

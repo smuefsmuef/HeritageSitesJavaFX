@@ -12,8 +12,7 @@ public class HeritagePM {
 
     private final StringProperty category = new SimpleStringProperty();
     private final StringProperty dateInscribed = new SimpleStringProperty();
-    private final IntegerProperty id = new SimpleIntegerProperty();
-    private final IntegerProperty code = new SimpleIntegerProperty();
+    private final StringProperty id = new SimpleStringProperty();
     private final StringProperty imgageURL = new SimpleStringProperty();
     private final StringProperty codeISO = new SimpleStringProperty();
     private final StringProperty location = new SimpleStringProperty();
@@ -25,23 +24,28 @@ public class HeritagePM {
     public HeritagePM(String[] line) {
         setCategory(line[0]);
         setDateInscribed(line[1]);
-        setId(Integer.parseInt(line[2]));
-        setCode(Integer.parseInt(line[3]));
-        setImgageURL(line[4]);
-        setCodeISO(line[5]);
-        setLocation(line[6]);
-        setRegion(line[7]);
-        setDescription(line[8]);
-        setSite(line[9]);
-        setStates(line[10]);
+        setId(line[2]);
+        setImgageURL(line[3]);
+        setCodeISO(line[4]);
+        setLocation(line[5]);
+        setRegion(line[6]);
+        setDescription(line[7]);
+        setSite(line[8]);
+        setStates(line[9]);
     }
 
     public String infoAsLine(String delimiter) {
         return String.join(delimiter,
-                getCategory(),
-                getCodeISO(),
-                getStates(),
-                getSite()
+                getCategory(), //
+                getDateInscribed(),
+                getId(),
+                getImgageURL(),
+                getCodeISO(), //
+                getLocation(),
+                getRegion(),
+                getDescription(),
+                getSite(),
+                getStates()
         );
     }
 
@@ -71,28 +75,16 @@ public class HeritagePM {
         this.dateInscribed.set(dateInscribed);
     }
 
-    public int getId() {
+    public String getId() {
         return id.get();
     }
 
-    public IntegerProperty idProperty() {
+    public StringProperty idProperty() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id.set(id);
-    }
-
-    public int getCode() {
-        return code.get();
-    }
-
-    public IntegerProperty codeProperty() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code.set(code);
     }
 
     public String getImgageURL() {

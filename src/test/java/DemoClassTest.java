@@ -10,4 +10,8 @@ public class DemoClassTest {
         DemoClass demo = new DemoClass();
         assertEquals("Hello World", demo.helloWorld());
     }
+
+    @Test
+    void start() {
+    }
 }
