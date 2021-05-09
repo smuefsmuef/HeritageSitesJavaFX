@@ -20,6 +20,7 @@ public class HeritagePM {
     private final StringProperty description = new SimpleStringProperty();
     private final StringProperty site = new SimpleStringProperty();
     private final StringProperty states = new SimpleStringProperty();
+    private final StringProperty visited = new SimpleStringProperty(); // todo: adapt
 
     public HeritagePM(String[] line) {
         setCategory(line[0]);
@@ -169,5 +170,17 @@ public class HeritagePM {
 
     public void setStates(String states) {
         this.states.set(states);
+    }
+
+    public String getVisited() {
+        return visited.get();
+    }
+
+    public StringProperty visitedProperty() {
+        return visited;
+    }
+
+    public void setVisited(String visited) {
+        this.visited.set(visited);
     }
 }

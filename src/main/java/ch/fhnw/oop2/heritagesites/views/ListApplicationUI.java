@@ -2,10 +2,13 @@ package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.PM;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+
+import static javafx.scene.layout.HBox.setHgrow;
 
 // todo: everything seems fine here
 
@@ -65,8 +68,6 @@ public class ListApplicationUI extends VBox {
         states.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
 
 
-
-
         return tableView;
     }
 
@@ -75,11 +76,13 @@ public class ListApplicationUI extends VBox {
         getChildren().addAll(tableHeritage);
 
         tableHeritage.setId("heritageTable");
+        setMargin(tableHeritage, new Insets(10));
 
 
     }
 
     private void setupEventHandlers() {
+        // todo: click on list element opens the event on the right
     }
 
     private void setupValueChangedListeners() {

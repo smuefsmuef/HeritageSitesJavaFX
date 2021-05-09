@@ -15,7 +15,7 @@ public class PM {
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
-
+private HeritagePM model;
 
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 

@@ -50,18 +50,20 @@ public class BorderUI extends BorderPane {
 
     public HBox addHBoxTop() {
         HBox hbox = new HBox();
-        hbox.setPadding(new Insets(15));
-        hbox.setSpacing(10);
+        hbox.setPadding(new Insets(5, 5, 5, 12));
+        hbox.setSpacing(5);
 
         hbox.setId("top");
 
-        addNewButton.setPrefSize(20, 20);
+        setMargin(hbox, new Insets(5, 2, 5, 2));
+
+        addNewButton.setPrefSize(15, 15);
         addNewButton.setId("addNewButton");
 
-        deleteButton.setPrefSize(20, 20);
+        deleteButton.setPrefSize(15, 15);
         deleteButton.setId("deleteButton");
 
-        saveButton.setPrefSize(100, 20);
+        saveButton.setPrefSize(100, 15);
         saveButton.setId("saveButton");
 
         hbox.getChildren().addAll(addNewButton, deleteButton, saveButton);
@@ -71,7 +73,7 @@ public class BorderUI extends BorderPane {
 
     public HBox addHBoxBottom() {
         HBox hbox = new HBox();
-        hbox.setPadding(new Insets(15));
+        hbox.setPadding(new Insets(5));
         hbox.setSpacing(10);
 
         hbox.setId("bottom");
@@ -79,13 +81,11 @@ public class BorderUI extends BorderPane {
         bottomButton = new Button("bottom, counter, visited heritages, visited countries");
         bottomButton.setMaxWidth(Double.MAX_VALUE);
 
-        setMargin(bottomButton, new Insets(15));
+        setMargin(bottomButton, new Insets(5));
         hbox.getChildren().addAll(bottomButton);
 
         return hbox;
     }
-
-
 
 
     private void setupEventHandlers() {
@@ -106,7 +106,6 @@ public class BorderUI extends BorderPane {
 
 
     private void setupBindings() {
-
 
 
     }
