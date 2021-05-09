@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,10 +12,27 @@ import java.util.stream.Collectors;
 public class PM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
 
-    //  private static final String csv_file = "/data/heritage_sites.csv";
-   //  private static final String csv_file = "resources/data/test.txt";
-    private static final String csv_file = "src/main/resources/data/test.txt";
-    private static final String DELIMITER = "\t";
+
+    // they all work
+    // txt mit abstand ;
+    //private static final String csv_file = "src/main/resources/data/test2.txt";
+    // private static final String DELIMITER = ";";
+
+    // csv mit abstand \t
+   // private static final String csv_file = "src/main/resources/data/test.csv";
+    // private static final String DELIMITER = "\t";
+
+    // txt mit \t
+    // private static final String csv_file = "src/main/resources/data/test.txt";
+    // private static final String DELIMITER = "\t";
+
+    // csv mit abstand ;
+   // private static final String csv_file = "src/main/resources/data/test2.csv";
+    // private static final String DELIMITER = ";";
+
+    private static final String csv_file = "src/main/resources/data/test2.csv";
+    private static final String DELIMITER = ";";
+
 
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
