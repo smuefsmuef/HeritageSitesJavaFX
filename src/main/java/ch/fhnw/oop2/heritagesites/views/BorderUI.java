@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.heritagesites.views;
 
+import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.PM;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 
 // borderUI contains top, center and bottom
@@ -18,45 +20,51 @@ import javafx.scene.layout.*;
 public class BorderUI extends BorderPane {
     private final PM model;
     private SplitUI split;
+    private HBox top;
+    private HBox bottom;
 
     private Button bottomButton;
-
-    HBox hbox = addHBoxTop();
-    HBox hboxBottom = addHBoxBottom();
-
+    private Button addNewButton = new Button("+");
+    private Button deleteButton = new Button("-");
+    private Button saveButton = new Button("Save");
 
     public BorderUI(PM model) {
         this.model = model;
         initializeControls();
         layoutControls();
+        setupBindings();
+        setupEventHandlers();
     }
 
     private void initializeControls() {
         split = new SplitUI(model);
+        top = addHBoxTop();
+        bottom = addHBoxBottom();
     }
 
     private void layoutControls() {
-        setTop(hbox);
+        setTop(top);
         setCenter(split);
-        setBottom(hboxBottom);
+        setBottom(bottom);
     }
-
 
     public HBox addHBoxTop() {
         HBox hbox = new HBox();
         hbox.setPadding(new Insets(15));
         hbox.setSpacing(10);
 
-        Button addNewButton = new Button("Add");
-        addNewButton.setPrefSize(100, 20);
+        hbox.setId("top");
 
-        Button deleteButton = new Button("Delete");
-        deleteButton.setPrefSize(100, 20);
+        addNewButton.setPrefSize(20, 20);
+        addNewButton.setId("addNewButton");
 
-        Button saveButton = new Button("Save");
+        deleteButton.setPrefSize(20, 20);
+        deleteButton.setId("deleteButton");
+
         saveButton.setPrefSize(100, 20);
+        saveButton.setId("saveButton");
 
-        hbox.getChildren().addAll(addNewButton, deleteButton,saveButton );
+        hbox.getChildren().addAll(addNewButton, deleteButton, saveButton);
 
         return hbox;
     }
@@ -66,9 +74,10 @@ public class BorderUI extends BorderPane {
         hbox.setPadding(new Insets(15));
         hbox.setSpacing(10);
 
+        hbox.setId("bottom");
+
         bottomButton = new Button("bottom, counter, visited heritages, visited countries");
         bottomButton.setMaxWidth(Double.MAX_VALUE);
-        // bottomButton.setPrefSize(500, 20);
 
         setMargin(bottomButton, new Insets(15));
         hbox.getChildren().addAll(bottomButton);
@@ -77,4 +86,28 @@ public class BorderUI extends BorderPane {
     }
 
 
+
+
+    private void setupEventHandlers() {
+
+        // model.addSite();
+        // model.deleteSite();
+
+        // todo: with new form on the left, atm add the first one again
+        addNewButton.setOnAction(event -> model.addSite());
+
+        // todo: remove the clicked one, bind clicked list element, atm delete first one
+        deleteButton.setOnAction(event -> model.getAllSites().remove(0));
+
+        // todo: setup save, changes on the left need to be stored
+        saveButton.setOnAction(event -> model.save());
+
+    }
+
+
+    private void setupBindings() {
+
+
+
+    }
 }

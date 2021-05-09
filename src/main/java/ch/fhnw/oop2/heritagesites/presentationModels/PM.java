@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,7 @@ public class PM {
             return reader
                     .lines()
                     .skip(1) // skip first line, header
-                    .map(line -> new HeritagePM(line.split(DELIMITER, 10))) // 10,  transform each line into an obect
+                    .map(line -> new HeritagePM(line.replaceAll(";;;;", "").split(DELIMITER, 10))) // 10,  transform each line into an obect
                     .collect(Collectors.toList());
         } catch (IOException e) {
             throw new IllegalStateException("no bueno - file not found");
@@ -43,36 +44,46 @@ public class PM {
     }
 
 
-//    // add new entry
-//    public void save() {
-//        try (BufferedWriter writer = getWriter(csv_file)) {
-//            writer.write("Das;ist;einTest");
-//            writer.newLine();
-//            allSites.stream()
-//                    .map(resultat -> resultat.infoAsLine(DELIMITER))
-//                    .forEach(line -> {
-//                        try {
-//                            writer.write(line);
-//                            writer.newLine();
-//                        } catch (IOException e) {
-//                            throw new IllegalStateException(e);
-//                        }
-//                    });
-//        } catch (IOException e) {
-//            throw new IllegalStateException("save failed");
-//        }
-//    }
+    // add new entry
+    public void save() {
+        try (BufferedWriter writer = getWriter(csv_file)) {
+            writer.write("Das;ist;einTest");
+            writer.newLine();
+            allSites.stream()
+                    .map(result -> result.infoAsLine(DELIMITER))
+                    .forEach(line -> {
+                        try {
+                            writer.write(line);
+                            writer.newLine();
+                        } catch (IOException e) {
+                            throw new IllegalStateException(e);
+                        }
+                    });
+        } catch (IOException e) {
+            throw new IllegalStateException("save failed");
+        }
+    }
 
+    // writes new entry into file
+    private BufferedWriter getWriter(String fileName) {
+        try {
+            String file = getClass().getResource(fileName).getFile();
+            return new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            throw new IllegalStateException("wrong file " + fileName);
+        }
+    }
 
-//
-//    private BufferedWriter getWriter(String fileName) {
-//        try {
-//            String file = getClass().getResource(fileName).getFile();
-//            return new BufferedWriter(new FileWriter(file, StandardCharsets.UTF_8));
-//        } catch (IOException e) {
-//            throw new IllegalStateException("wrong file " + fileName);
-//        }
-//    }
+    // delete site
+    public void deleteSite(HeritagePM eins) {
+       allSites.remove(eins);
+    }
+
+    // add site
+    public void addSite() {
+        allSites.add(getAllSites().get(0));
+    }
+
 
 
     /// Getter & Setter

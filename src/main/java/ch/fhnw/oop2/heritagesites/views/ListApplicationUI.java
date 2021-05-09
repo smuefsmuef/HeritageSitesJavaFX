@@ -37,7 +37,6 @@ public class ListApplicationUI extends VBox {
 
         TableColumn<HeritagePM, String> name = new TableColumn<>("Name");
         name.setCellValueFactory(cell -> cell.getValue().siteProperty());
-        name.setCellValueFactory(cell -> cell.getValue().siteProperty());
 
         TableColumn<HeritagePM, String> category = new TableColumn<>("Category");
         category.setCellValueFactory(cell -> cell.getValue().categoryProperty());
@@ -50,12 +49,34 @@ public class ListApplicationUI extends VBox {
 
         tableView.getColumns().addAll(name, category, country, states);
 
+
+        // layout of the table
+        // todo: maybe move to layoutControls();
+        name.setId("name");
+        category.setId("category");
+        country.setId("country");
+        states.setId("states");
+        tableView.setId("tableView");
+
+        // bind columnsize to width
+        name.prefWidthProperty().bind(tableView.widthProperty().multiply(0.6));
+        category.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
+        country.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
+        states.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
+
+
+
+
         return tableView;
     }
 
     private void layoutControls() {
         setVgrow(tableHeritage, Priority.ALWAYS);
         getChildren().addAll(tableHeritage);
+
+        tableHeritage.setId("heritageTable");
+
+
     }
 
     private void setupEventHandlers() {
