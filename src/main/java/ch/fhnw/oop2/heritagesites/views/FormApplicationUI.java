@@ -3,10 +3,14 @@ package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.PM;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -15,6 +19,7 @@ import java.util.concurrent.Callable;
 
 public class FormApplicationUI extends GridPane {
     private final PM model;
+    public ListApplicationUI test; // todo: when table left changes (by click f.e.) then update here
     private Label title;
 
     private Label siteLabel;
@@ -39,6 +44,7 @@ public class FormApplicationUI extends GridPane {
     private CheckBox visitedField;
 
 
+
     public FormApplicationUI(PM model) {
         this.model = model;
         initializeSelf();
@@ -54,6 +60,8 @@ public class FormApplicationUI extends GridPane {
     }
 
     public void initializeControls() {
+        test = new ListApplicationUI(model);
+
         title = new Label("rechte seite");
 
         //
@@ -69,7 +77,8 @@ public class FormApplicationUI extends GridPane {
         visitedLabel = new Label("Visited");
 
         // todo atm 0 --> change to the clicked one
-        siteField = new TextField(model.getAllSites().get(0).getSite());
+        System.out.println(test.getIdSite()); // this is correct, gets the right value, but we need to update it
+        siteField = new TextField(model.getAllSites().get(test.getIdSite()).getSite());
         dateInscribedField = new TextField();
         regionField = new TextField();
         codeISOField = new TextField();
@@ -153,6 +162,7 @@ public class FormApplicationUI extends GridPane {
     }
 
     private void setupValueChangedListeners() {
+
     }
 
     private void setupBindings() {

@@ -35,7 +35,7 @@ class PMTest {
         assertEquals("Natural", resulate.get(0).getCategory());
         assertEquals("Natural", resulate.get(resulate.size() - 1).getCategory());
         assertEquals("154", resulate.get(0).getId());
-        assertEquals("Australia;;;;", resulate.get(0).getStates());
+        assertEquals("Australia", resulate.get(0).getStates());
         assertEquals("Great Barrier Reef", resulate.get(0).getSite());
     }
 

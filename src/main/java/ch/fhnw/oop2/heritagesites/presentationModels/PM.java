@@ -15,7 +15,6 @@ public class PM {
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
-private HeritagePM model;
 
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
@@ -76,14 +75,13 @@ private HeritagePM model;
 
     // delete site
     public void deleteSite(HeritagePM eins) {
-       allSites.remove(eins);
+        allSites.remove(eins);
     }
 
     // add site
     public void addSite() {
         allSites.add(getAllSites().get(0));
     }
-
 
 
     /// Getter & Setter
@@ -99,6 +97,7 @@ private HeritagePM model;
     public ObservableList<HeritagePM> getAllSites() {
         return allSites;
     }
+
 }
 
 

@@ -28,6 +28,7 @@ public class BorderUI extends BorderPane {
     private Button deleteButton = new Button("-");
     private Button saveButton = new Button("Save");
 
+
     public BorderUI(PM model) {
         this.model = model;
         initializeControls();
