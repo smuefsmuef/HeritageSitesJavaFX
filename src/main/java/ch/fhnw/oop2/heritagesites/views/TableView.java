@@ -16,14 +16,14 @@ import static javafx.scene.layout.HBox.setHgrow;
 
 // todo: everything seems fine here
 
-public class ListApplicationUI extends VBox {
+public class TableView extends VBox {
     private final PM model;
-    private TableView<HeritagePM> tableHeritage;
+    private javafx.scene.control.TableView<HeritagePM> tableHeritage;
 
     public int idSite; // update
 
 
-    public ListApplicationUI(PM model) {
+    public TableView(PM model) {
         this.model = model;
         initializeSelf();
         initializeControls();
@@ -41,8 +41,8 @@ public class ListApplicationUI extends VBox {
         tableHeritage = initializeTable();
     }
 
-    private TableView<HeritagePM> initializeTable() {
-        TableView<HeritagePM> tableView = new TableView<>(model.getAllSites());
+    private javafx.scene.control.TableView<HeritagePM> initializeTable() {
+        javafx.scene.control.TableView<HeritagePM> tableView = new javafx.scene.control.TableView<>(model.getAllSites());
 
         TableColumn<HeritagePM, String> name = new TableColumn<>("Name");
         name.setCellValueFactory(cell -> cell.getValue().siteProperty());

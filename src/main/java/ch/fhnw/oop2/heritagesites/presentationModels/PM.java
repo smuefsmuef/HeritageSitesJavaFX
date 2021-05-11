@@ -84,6 +84,16 @@ public class PM {
     }
 
 
+    // counter
+    public int getTotalCountries() {
+        return (int) allSites.stream().count();
+    }
+
+    // counter // todo adapt stream to get some with visited true, but first i need to geta new column to each object with default false
+    //public int getVisitedCountryCounter() {
+      // return (int) allSites.stream().filter(s -> s.getVisited().equals(true)).count();
+   // }
+
     /// Getter & Setter
 
     public String getApplicationTitle() {

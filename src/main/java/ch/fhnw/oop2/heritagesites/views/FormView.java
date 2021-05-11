@@ -1,25 +1,14 @@
 package ch.fhnw.oop2.heritagesites.views;
 
 
-import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.PM;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.ListChangeListener;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
-import java.util.concurrent.Callable;
-
-public class FormApplicationUI extends GridPane {
+public class FormView extends GridPane {
     private final PM model;
-    public ListApplicationUI test; // todo: when table left changes (by click f.e.) then update here
+    public TableView test; // todo: when table left changes (by click f.e.) then update here
     private Label title;
 
     private Label siteLabel;
@@ -45,7 +34,7 @@ public class FormApplicationUI extends GridPane {
 
 
 
-    public FormApplicationUI(PM model) {
+    public FormView(PM model) {
         this.model = model;
         initializeSelf();
         initializeControls();
@@ -60,7 +49,7 @@ public class FormApplicationUI extends GridPane {
     }
 
     public void initializeControls() {
-        test = new ListApplicationUI(model);
+        test = new TableView(model);
 
         title = new Label("rechte seite");
 
