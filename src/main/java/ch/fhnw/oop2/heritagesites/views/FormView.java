@@ -32,7 +32,6 @@ public class FormView extends GridPane {
     private CheckBox visitedField;
 
 
-
     public FormView(PM model) {
         this.model = model;
         initializeSelf();
@@ -51,7 +50,7 @@ public class FormView extends GridPane {
         test = new TableView(model);
 
 
-        title = new Label("rechte seite");
+        title = new Label();
 
         //
         siteLabel = new Label("Name");
@@ -67,12 +66,11 @@ public class FormView extends GridPane {
         // todo atm 0 --> change to the clicked one
         System.out.println(test.getIdSite()); // this is correct, gets the right value, but we need to update it
         siteField = new TextField(model.getAllSites().get(test.getIdSite()).getSite());
-        dateInscribedField = new TextField();
+        dateInscribedField = new TextField(model.getAllSites().get(test.getIdSite()).getDateInscribed());
         regionField = new TextField();
         codeISOField = new TextField();
         imageURLField = new Hyperlink(model.getAllSites().get(0).getImgageURL());
         visitedField = new CheckBox("Visited");
-      // visitedField.setIndeterminate(model.getAllSites().get(0).isVisited());
 
         categoryField = new TextField();
         locationField = new TextField();
@@ -86,12 +84,12 @@ public class FormView extends GridPane {
 
     private void layoutControls() {
         // general stuff
-        setPadding(new Insets(10));
+        setPadding(new Insets(0, 10, 10, 10));
         visitedField.setSelected(model.getAllSites().get(0).isVisited());
 
 
         // title
-        setMargin(title, new Insets(5,0,5,0));
+        setMargin(title, new Insets(5, 0, 5, 0));
         title.setId("formTitle");
 
 
@@ -112,7 +110,7 @@ public class FormView extends GridPane {
 
 
         // gridPane.add(Node, columnIndex, rowIndex, colspan, rowspan);
-        add(title, 0, 0, 2, 1);
+        add(title, 1, 0, 2, 1);
 
         add(siteLabel, 0, 1, 1, 1);
         add(siteField, 1, 1, 1, 1);
@@ -146,15 +144,14 @@ public class FormView extends GridPane {
         descriptionField.setWrapText(true);
 
 
-
     }
 
     private void setupEventHandlers() {
 
-        if(visitedField.isSelected() == false) {
+        if (visitedField.isSelected() == false) {
             System.out.println("set to true");
             visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(true));
-        }else {
+        } else {
             System.out.println("set to false");
             visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(false));
         }
@@ -165,7 +162,7 @@ public class FormView extends GridPane {
     }
 
     private void setupBindings() {
-        // title
+        title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
     }
 
 
