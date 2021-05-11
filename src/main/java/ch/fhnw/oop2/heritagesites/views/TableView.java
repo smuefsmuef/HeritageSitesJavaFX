@@ -7,23 +7,16 @@ import javafx.scene.control.*;
 
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
-
-import java.awt.event.MouseEvent;
-import java.beans.EventHandler;
-
-import static javafx.scene.layout.HBox.setHgrow;
 
 // todo: everything seems fine here
 
-public class ListApplicationUI extends VBox {
+public class TableView extends VBox {
     private final PM model;
-    private TableView<HeritagePM> tableHeritage;
+    private javafx.scene.control.TableView<HeritagePM> tableHeritage;
 
     public int idSite; // update
 
-
-    public ListApplicationUI(PM model) {
+    public TableView(PM model) {
         this.model = model;
         initializeSelf();
         initializeControls();
@@ -41,8 +34,8 @@ public class ListApplicationUI extends VBox {
         tableHeritage = initializeTable();
     }
 
-    private TableView<HeritagePM> initializeTable() {
-        TableView<HeritagePM> tableView = new TableView<>(model.getAllSites());
+    private javafx.scene.control.TableView<HeritagePM> initializeTable() {
+        javafx.scene.control.TableView<HeritagePM> tableView = new javafx.scene.control.TableView<>(model.getAllSites());
 
         TableColumn<HeritagePM, String> name = new TableColumn<>("Name");
         name.setCellValueFactory(cell -> cell.getValue().siteProperty());
@@ -75,7 +68,6 @@ public class ListApplicationUI extends VBox {
 
         // System.out.println(tableView.getSelectionModel().getSelectedCells());
 
-
         return tableView;
     }
 
@@ -84,16 +76,13 @@ public class ListApplicationUI extends VBox {
         getChildren().addAll(tableHeritage);
 
         tableHeritage.setId("heritageTable");
-        setMargin(tableHeritage, new Insets(10));
-
-
+        setMargin(tableHeritage, new Insets(7));
     }
 
     private void setupEventHandlers() {
         // todo: click on list element opens the event on the right
 
         tableHeritage.setOnMouseClicked(event -> {
-
 
             System.out.println("hallooo, laufscvh=?");
             System.out.println(event);
@@ -109,7 +98,6 @@ public class ListApplicationUI extends VBox {
             setIdSite(index);
 
         });
-
 
     }
 

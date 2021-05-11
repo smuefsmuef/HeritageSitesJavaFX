@@ -1,9 +1,6 @@
 package ch.fhnw.oop2.heritagesites.presentationModels;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 // heritagePM analog gemeimende
 // todo: seems alsook
@@ -20,7 +17,7 @@ public class HeritagePM {
     private final StringProperty description = new SimpleStringProperty();
     private final StringProperty site = new SimpleStringProperty();
     private final StringProperty states = new SimpleStringProperty();
-    private final StringProperty visited = new SimpleStringProperty(); // todo: adapt
+    private final BooleanProperty visited = new SimpleBooleanProperty(false);
 
     public HeritagePM(String[] line) {
         setCategory(line[0]);
@@ -33,6 +30,7 @@ public class HeritagePM {
         setDescription(line[7]);
         setSite(line[8]);
         setStates(line[9]);
+        setVisited(true);
     }
 
     public String infoAsLine(String delimiter) {
@@ -172,15 +170,15 @@ public class HeritagePM {
         this.states.set(states);
     }
 
-    public String getVisited() {
+    public boolean isVisited() {
         return visited.get();
     }
 
-    public StringProperty visitedProperty() {
+    public BooleanProperty visitedProperty() {
         return visited;
     }
 
-    public void setVisited(String visited) {
+    public void setVisited(boolean visited) {
         this.visited.set(visited);
     }
 }

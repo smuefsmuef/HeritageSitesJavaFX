@@ -1,21 +1,27 @@
-FormApplicationUI {
+FormView {
     -fx-start-margin: 50;
     -fx-font-size: 10;
     -fx-text-fill: #1b1b49;
     -fx-grid-lines-visible: false;
+    -fx-background-color: transparent;
+}
+
+SplitView {
     -fx-background-color: linear-gradient(to top, #1dbbdd44, #93f9b944);
 }
 
 
 #top {
     -fx-background-color: #93f9b944;
-    -fx-background-color: linear-gradient(to right, #c1a0db, #93f9b944);
+    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
     -fx-background-position: right center;
-    -fx-background-radius: 30px;
 }
 
 #bottom {
     -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+    -fx-font-size: 8;
+    -fx-text-alignment: right;
+
 }
 
 .button {

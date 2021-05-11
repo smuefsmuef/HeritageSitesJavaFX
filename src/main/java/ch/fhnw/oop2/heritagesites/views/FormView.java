@@ -1,25 +1,14 @@
 package ch.fhnw.oop2.heritagesites.views;
 
 
-import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.PM;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.ListChangeListener;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
-import java.util.concurrent.Callable;
-
-public class FormApplicationUI extends GridPane {
+public class FormView extends GridPane {
     private final PM model;
-    public ListApplicationUI test; // todo: when table left changes (by click f.e.) then update here
+    public TableView test; // todo: when table left changes (by click f.e.) then update here
     private Label title;
 
     private Label siteLabel;
@@ -40,12 +29,11 @@ public class FormApplicationUI extends GridPane {
     private TextField codeISOField;
     private Label imageURLLabel;
     private Hyperlink imageURLField;
-    private Label visitedLabel;
     private CheckBox visitedField;
 
 
 
-    public FormApplicationUI(PM model) {
+    public FormView(PM model) {
         this.model = model;
         initializeSelf();
         initializeControls();
@@ -60,7 +48,8 @@ public class FormApplicationUI extends GridPane {
     }
 
     public void initializeControls() {
-        test = new ListApplicationUI(model);
+        test = new TableView(model);
+
 
         title = new Label("rechte seite");
 
@@ -74,7 +63,6 @@ public class FormApplicationUI extends GridPane {
         descriptionLabel = new Label("Short Description");
         codeISOLabel = new Label("ISO Code");
         imageURLLabel = new Label("Image URL");
-        visitedLabel = new Label("Visited");
 
         // todo atm 0 --> change to the clicked one
         System.out.println(test.getIdSite()); // this is correct, gets the right value, but we need to update it
@@ -83,7 +71,9 @@ public class FormApplicationUI extends GridPane {
         regionField = new TextField();
         codeISOField = new TextField();
         imageURLField = new Hyperlink(model.getAllSites().get(0).getImgageURL());
-        visitedField = new CheckBox();
+        visitedField = new CheckBox("Visited");
+      // visitedField.setIndeterminate(model.getAllSites().get(0).isVisited());
+
         categoryField = new TextField();
         locationField = new TextField();
         dateInscribedField = new TextField();
@@ -97,6 +87,8 @@ public class FormApplicationUI extends GridPane {
     private void layoutControls() {
         // general stuff
         setPadding(new Insets(10));
+        visitedField.setSelected(model.getAllSites().get(0).isVisited());
+
 
         // title
         setMargin(title, new Insets(5,0,5,0));
@@ -149,8 +141,7 @@ public class FormApplicationUI extends GridPane {
         add(imageURLLabel, 0, 9, 1, 1);
         add(imageURLField, 1, 9, 1, 1);
 
-        add(visitedLabel, 0, 10, 1, 1);
-        add(visitedField, 1, 10, 1, 1);
+        add(visitedField, 1, 10, 1, 2);
 
         descriptionField.setWrapText(true);
 
@@ -159,6 +150,14 @@ public class FormApplicationUI extends GridPane {
     }
 
     private void setupEventHandlers() {
+
+        if(visitedField.isSelected() == false) {
+            System.out.println("set to true");
+            visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(true));
+        }else {
+            System.out.println("set to false");
+            visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(false));
+        }
     }
 
     private void setupValueChangedListeners() {

@@ -73,6 +73,11 @@ public class PM {
         }
     }
 
+    // todo add visited checkbox
+    public void storeVisitedStatus() {
+
+    }
+
     // delete site
     public void deleteSite(HeritagePM eins) {
         allSites.remove(eins);
@@ -83,6 +88,23 @@ public class PM {
         allSites.add(getAllSites().get(0));
     }
 
+
+    // counter total sites, ok
+    public int getTotalSites() {
+        return (int) allSites.stream().count();
+    }
+
+    // counter for visited sites, todo
+    public int getVisitedSitesCounter() {
+     return (int) allSites.stream().filter(s -> s.isVisited()).count();
+    }
+
+    // counter for visited countries, ok
+    public int getVisitedCountriesCounter() {
+        return (int) allSites.stream().
+                filter(s -> s.isVisited()).
+        map(HeritagePM::getStates).distinct().count();
+    }
 
     /// Getter & Setter
 
