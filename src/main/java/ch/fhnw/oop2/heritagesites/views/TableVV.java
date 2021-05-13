@@ -2,21 +2,23 @@ package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 // todo: everything seems fine here
 
-public class TableView extends VBox {
+public class TableVV extends VBox {
     private final WorldHeritagesPM model;
-    private javafx.scene.control.TableView<HeritagePM> tableHeritage;
+    private TableView<HeritagePM> tableHeritage;
 
-   // public int idSite; // update
 
-    public TableView(WorldHeritagesPM model) {
+    public TableVV(WorldHeritagesPM model) {
         this.model = model;
         initializeSelf();
         initializeControls();
@@ -32,10 +34,12 @@ public class TableView extends VBox {
 
     public void initializeControls() {
         tableHeritage = initializeTable();
+
+        // get selection model
     }
 
-    private javafx.scene.control.TableView<HeritagePM> initializeTable() {
-        javafx.scene.control.TableView<HeritagePM> tableView = new javafx.scene.control.TableView<>(model.getAllSites());
+    private TableView<HeritagePM> initializeTable() {
+        TableView<HeritagePM> tableView = new TableView<>(model.getAllSites());
 
         TableColumn<HeritagePM, String> name = new TableColumn<>("Name");
         name.setCellValueFactory(cell -> cell.getValue().siteProperty());
@@ -66,8 +70,6 @@ public class TableView extends VBox {
         country.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
         states.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
 
-        // System.out.println(tableView.getSelectionModel().getSelectedCells());
-
         return tableView;
     }
 
@@ -80,38 +82,23 @@ public class TableView extends VBox {
     }
 
     private void setupEventHandlers() {
-        // todo: click on list element opens the event on the right
-
-       /* tableHeritage.setOnMouseClicked(event -> {
-
-            System.out.println("hallooo, laufscvh=?");
-            System.out.println(event);
-
-            // todo somethning is worng here
-            TableCell c = (TableCell) event.getTarget();
-            int index = c.getIndex();
-
-            System.out.println("id = " + model.getAllSites().get(index).getSite());
-            System.out.println("id = " + model.getAllSites().get(index).getId());
-
-            // String id = model.getAllSites().get(index).getId();
-            setIdSite(index);
-
-        });*/
 
     }
 
     private void setupValueChangedListeners() {
+
+        tableHeritage.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("oldValue: " + oldValue.getId());
+            System.out.println("newValue: " + newValue.getId());
+            model.setSelectedHeritageId(newValue.getId());
+        });
     }
 
     private void setupBindings() {
     }
 
-  /*  public int getIdSite() {
-        return idSite;
-    }
-
-    public void setIdSite(int idSite) {
-        this.idSite = idSite;
-    }*/
 }
+
+
+// delete button
+//selectionModel.clearSelection();

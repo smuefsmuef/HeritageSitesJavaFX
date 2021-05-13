@@ -29,6 +29,7 @@ public class WorldHeritagesPM {
         allSites.addAll(readFromFile());
         
         selectedHeritageIdProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("recations of the listener" + oldValue);
             HeritagePM oldOne = getHeritage(oldValue.intValue());
             HeritagePM newOne = getHeritage(newValue.intValue());
 
@@ -100,16 +101,21 @@ public class WorldHeritagesPM {
     
     // getHeritage
     private HeritagePM getHeritage(int id) {
+        System.out.println("id transmitted to pm: " + id);
         return allSites.stream()
                 .filter(site -> site.getId() == id)
                 .findAny()
                 .orElse(null);
     }
 
+    public HeritagePM getHeritageProxy() {
+        return heritageProxy;
+    }
+
     private void bindToProxy(HeritagePM site) {
         heritageProxy.categoryProperty().bindBidirectional(site.categoryProperty());
         heritageProxy.dateInscribedProperty().bindBidirectional(site.dateInscribedProperty());
-        heritageProxy.idProperty().bindBidirectional(site.idProperty());
+        heritageProxy.idProperty().bind(site.idProperty());
         heritageProxy.imgageURLProperty().bindBidirectional(site.imgageURLProperty());
         heritageProxy.codeISOProperty().bindBidirectional(site.codeISOProperty());
         heritageProxy.locationProperty().bindBidirectional(site.locationProperty());
@@ -192,16 +198,14 @@ public class WorldHeritagesPM {
     }
 
     public IntegerProperty selectedHeritageIdProperty() {
+        System.out.println(selectedHeritageId);
         return selectedHeritageId;
     }
 
     public void setSelectedHeritageId(int selectedHeritageId) {
         this.selectedHeritageId.set(selectedHeritageId);
-    }
-//  public HeritagePM getHeritage(int id) {
-    //    return allSites.get(id);
-    //}
 
+    }
 
 }
 

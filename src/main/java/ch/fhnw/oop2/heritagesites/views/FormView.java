@@ -1,6 +1,7 @@
 package ch.fhnw.oop2.heritagesites.views;
 
 
+import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -8,7 +9,6 @@ import javafx.scene.layout.*;
 
 public class FormView extends GridPane {
     private final WorldHeritagesPM model;
-    public TableView test; // todo: when table left changes (by click f.e.) then update here
     private Label title;
 
     private Label siteLabel;
@@ -47,8 +47,6 @@ public class FormView extends GridPane {
     }
 
     public void initializeControls() {
-        test = new TableView(model);
-
 
         title = new Label();
 
@@ -63,8 +61,6 @@ public class FormView extends GridPane {
         codeISOLabel = new Label("ISO Code");
         imageURLLabel = new Label("Image URL");
 
-        // todo atm 0 --> change to the clicked one
-        System.out.println(); // this is correct, gets the right value, but we need to update it
         siteField = new TextField();
         dateInscribedField = new TextField();
         regionField = new TextField();
@@ -77,14 +73,14 @@ public class FormView extends GridPane {
         descriptionField = new TextArea();
         statesField = new TextField();
 
-        descriptionField.setId("descriptionField");
     }
 
 
     private void layoutControls() {
         // general stuff
         setPadding(new Insets(0, 10, 10, 10));
-        visitedField.setSelected(model.getAllSites().get(0).isVisited());
+//        visitedField.setSelected(model.getAllSites().get(0).isVisited());
+        descriptionField.setId("descriptionField");
 
 
         // title
@@ -161,7 +157,28 @@ public class FormView extends GridPane {
     }
 
     private void setupBindings() {
+
      //   title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
+
+
+        HeritagePM proxy = model.getHeritageProxy();
+
+        System.out.println(proxy);
+        categoryField.textProperty().bindBidirectional(proxy.categoryProperty());
+        dateInscribedField.textProperty().bindBidirectional(proxy.dateInscribedProperty());
+        imageURLField.textProperty().bindBidirectional(proxy.imgageURLProperty());
+        codeISOField.textProperty().bindBidirectional(proxy.codeISOProperty());
+        locationField.textProperty().bindBidirectional(proxy.locationProperty());
+        regionField.textProperty().bindBidirectional(proxy.regionProperty());
+        descriptionField.textProperty().bindBidirectional(proxy.descriptionProperty());
+        siteField.textProperty().bindBidirectional(proxy.siteProperty());
+        statesField.textProperty().bindBidirectional(proxy.statesProperty());
+        visitedField.selectedProperty().bindBidirectional(proxy.visitedProperty());
+
+
+
+// add the rest
+
     }
 
 

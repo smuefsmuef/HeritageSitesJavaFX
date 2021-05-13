@@ -19,7 +19,7 @@ public class SplitView extends SplitPane {
 
     private void layoutControls() {
         // links --> über neues UI lösen
-        TableView left = new TableView(model);
+        TableVV left = new TableVV(model);
 
         // rechts --> über neues UI lösen
         FormView right = new FormView(model);
