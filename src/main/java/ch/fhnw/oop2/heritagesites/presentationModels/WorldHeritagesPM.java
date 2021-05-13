@@ -13,20 +13,38 @@ import java.util.stream.Collectors;
 public class WorldHeritagesPM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
 
-   // private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(-1);
-//private final HeritagePM heritageProxy = new HeritagePM();
-
+   private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(-1);
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
 
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
+    private final HeritagePM heritageProxy = new HeritagePM(); // proxy to add bind all the views to the same object
+
+
 
     public WorldHeritagesPM() throws FileNotFoundException {
         System.out.println(getApplicationTitle());
         allSites.addAll(readFromFile());
+        
+        selectedHeritageIdProperty().addListener((observable, oldValue, newValue) -> {
+            HeritagePM oldOne = getHeritage(oldValue.intValue());
+            HeritagePM newOne = getHeritage(newValue.intValue());
+
+            if (oldOne != null) {
+                unbindFromProxy(oldOne);
+            }
+
+            if (newOne != null) {
+                bindToProxy(newOne);
+            }
+            
+        });
+      
     }
+    
+    /// Reader
 
 
     private List<HeritagePM> readFromFile() {
@@ -78,7 +96,43 @@ public class WorldHeritagesPM {
         }
     }
 
+    /// Binder to Proxy
+    
+    // getHeritage
+    private HeritagePM getHeritage(int id) {
+        return allSites.stream()
+                .filter(site -> site.getId() == id)
+                .findAny()
+                .orElse(null);
+    }
 
+    private void bindToProxy(HeritagePM site) {
+        heritageProxy.categoryProperty().bindBidirectional(site.categoryProperty());
+        heritageProxy.dateInscribedProperty().bindBidirectional(site.dateInscribedProperty());
+        heritageProxy.idProperty().bindBidirectional(site.idProperty());
+        heritageProxy.imgageURLProperty().bindBidirectional(site.imgageURLProperty());
+        heritageProxy.codeISOProperty().bindBidirectional(site.codeISOProperty());
+        heritageProxy.locationProperty().bindBidirectional(site.locationProperty());
+        heritageProxy.regionProperty().bindBidirectional(site.regionProperty());
+        heritageProxy.descriptionProperty().bindBidirectional(site.descriptionProperty());
+        heritageProxy.siteProperty().bindBidirectional(site.siteProperty());
+        heritageProxy.statesProperty().bindBidirectional(site.statesProperty());
+        heritageProxy.visitedProperty().bindBidirectional(site.visitedProperty());
+    }
+
+    private void unbindFromProxy(HeritagePM site) {
+        heritageProxy.categoryProperty().unbindBidirectional(site.categoryProperty());
+        heritageProxy.dateInscribedProperty().unbindBidirectional(site.dateInscribedProperty());
+        heritageProxy.idProperty().unbindBidirectional(site.idProperty());
+        heritageProxy.imgageURLProperty().unbindBidirectional(site.imgageURLProperty());
+        heritageProxy.codeISOProperty().unbindBidirectional(site.codeISOProperty());
+        heritageProxy.locationProperty().unbindBidirectional(site.locationProperty());
+        heritageProxy.regionProperty().unbindBidirectional(site.regionProperty());
+        heritageProxy.descriptionProperty().unbindBidirectional(site.descriptionProperty());
+        heritageProxy.siteProperty().unbindBidirectional(site.siteProperty());
+        heritageProxy.statesProperty().unbindBidirectional(site.statesProperty());
+        heritageProxy.visitedProperty().unbindBidirectional(site.visitedProperty());
+    }
 
 
     ///  Save, Add, Remove
@@ -133,7 +187,18 @@ public class WorldHeritagesPM {
         return allSites;
     }
 
-  //  public HeritagePM getHeritage(int id) {
+    public int getSelectedHeritageId() {
+        return selectedHeritageId.get();
+    }
+
+    public IntegerProperty selectedHeritageIdProperty() {
+        return selectedHeritageId;
+    }
+
+    public void setSelectedHeritageId(int selectedHeritageId) {
+        this.selectedHeritageId.set(selectedHeritageId);
+    }
+//  public HeritagePM getHeritage(int id) {
     //    return allSites.get(id);
     //}
 
