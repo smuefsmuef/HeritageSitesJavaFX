@@ -10,11 +10,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 
 public class WorldHeritagesPM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
 
-   private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(0);
+    private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(-1);
+    private final SimpleIntegerProperty visitedSites = new SimpleIntegerProperty();
+    private final SimpleIntegerProperty visitedCountries = new SimpleIntegerProperty();
+
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
@@ -24,29 +29,26 @@ public class WorldHeritagesPM {
     private final HeritagePM heritageProxy = new HeritagePM(); // proxy to add bind all the views to the same object
 
 
-
     public WorldHeritagesPM() throws FileNotFoundException {
         System.out.println(getApplicationTitle());
         allSites.addAll(readFromFile());
-        
+
         selectedHeritageIdProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("recations of the listener" + oldValue);
             HeritagePM oldOne = getHeritage(oldValue.intValue());
             HeritagePM newOne = getHeritage(newValue.intValue());
-
             if (oldOne != null) {
                 unbindFromProxy(oldOne);
             }
-
             if (newOne != null) {
                 bindToProxy(newOne);
             }
-            
         });
-      
+
     }
-    
-    /// Reader
+
+
+    //////////////////////////////////////  Reader & Writer  ////////////////////////////////
 
 
     private List<HeritagePM> readFromFile() {
@@ -55,7 +57,7 @@ public class WorldHeritagesPM {
                     .lines()
                     .skip(1) // skip first line, header
                     .map(line -> new HeritagePM(line.replaceAll(";;;;", "").split(DELIMITER, 10))) // 10,  transform each line into an obect
-                    .collect(Collectors.toList());
+                    .collect(toList());
         } catch (IOException e) {
             throw new IllegalStateException("no bueno - file not found");
         }
@@ -98,8 +100,10 @@ public class WorldHeritagesPM {
         }
     }
 
-    /// Binder to Proxy
-    
+
+    //////////////////////////////////////  Binders for Proxy  ////////////////////////////////
+
+
     // getHeritage
     private HeritagePM getHeritage(int id) {
         System.out.println("id transmitted to pm: " + id);
@@ -142,43 +146,92 @@ public class WorldHeritagesPM {
     }
 
 
-    ///  Save, Add, Remove Todo:
+    //////////////////////////////////////  Save, Add, Remove ////////////////////////////////
+
+
+    public int getNextId() {
+        int idtest = 0;
+        for (HeritagePM site : allSites) {
+            if (site.getId() > idtest) {
+                idtest = site.getId();
+            }
+        }
+        return idtest + 1;
+    }
+
+    // save
+    public void addSite() { // todo
+// open only a new form for new proxy, id -1
+// System.out.println(allSites.get(allSites.lastIndexOf(allSites)));
+    }
 
     // add site
-    public void addSite() {
-        allSites.add(getAllSites().get(0));
+    public void saveSite() { // todo
+        // add the  filled form, give a new id
+        // allSites.add(new HeritagePM("dsdasd", "kj", "sfsdf", "sdasd", getLastId() + 1));
+        System.out.println("lastindex" + getNextId());
+
+        //allSites.add();
+        allSites.add(getHeritageProxy());
+
+
+        HeritagePM lastOne = allSites.get(allSites.size() - 1);
+        lastOne.setId(getNextId());
+
+        System.out.println(lastOne.getSite());
+        System.out.println(lastOne.getId());
     }
 
     // delete site
-    public void deleteSite(HeritagePM eins) {
-        allSites.remove(eins);
+    public void deleteSite(int eins) {
+        System.out.println("delete: " + eins);
+        for (HeritagePM site : allSites) {
+            if (site.getId() == eins) {
+                allSites.remove(site);
+                break;
+            }
+        }
     }
 
 
+    //////////////////////////////////////  Counters  ////////////////////////////////
 
-
-    ///  Counters // todo make sure the footer counters are updated after changing the checkboy visited
-
-    // counter total sites, ok
+    // counter total sites, works ok
     public int getTotalSites() {
+        System.out.println("total Sites counter: " + (int) allSites.stream().count());
         return (int) allSites.stream().count();
     }
 
-    // counter for visited sites
+
+    public void updateCounters() {
+        getVisitedSitesCounter();
+        getVisitedCountriesCounter();
+    }
+
+
+    // counter for visited sites, works, ok
     public int getVisitedSitesCounter() {
-        return (int) allSites.stream().filter(s -> s.isVisited()).count();
+        int counter = (int) allSites.stream().filter(s -> s.isVisited()).count();
+        System.out.println("visited Sites counter: " + counter);
+        setVisitedSites(counter);
+        return  counter;
     }
 
-
-    // counter for visited countries, ok
+    // counter for visited countries, ok todo
     public int getVisitedCountriesCounter() {
-        return (int) allSites.stream().
+        int counter = (int) allSites.stream().
                 filter(s -> s.isVisited()).
-        map(HeritagePM::getStates).distinct().count();
+                map(HeritagePM::getStates).distinct().count();
+        System.out.println("total visited countries: " + counter);
+        setVisitedCountries(counter);
+        return counter;
     }
 
+    // counter string list all visited countries
 
-    /// Getter & Setter
+
+    //////////////////////////////////////  Getter & Setter  ////////////////////////////////
+
 
     public String getApplicationTitle() {
         return applicationTitle.get();
@@ -206,6 +259,29 @@ public class WorldHeritagesPM {
 
     }
 
+    public int getVisitedSites() {
+        return visitedSites.get();
+    }
+
+    public SimpleIntegerProperty visitedSitesProperty() {
+        return visitedSites;
+    }
+
+    public void setVisitedSites(int visitedSites) {
+        this.visitedSites.set(visitedSites);
+    }
+
+    public int getVisitedCountries() {
+        return visitedCountries.get();
+    }
+
+    public SimpleIntegerProperty visitedCountriesProperty() {
+        return visitedCountries;
+    }
+
+    public void setVisitedCountries(int visitedCountries) {
+        this.visitedCountries.set(visitedCountries);
+    }
 }
 
 

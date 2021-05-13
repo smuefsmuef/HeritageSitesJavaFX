@@ -29,19 +29,36 @@ SplitView {
 }
 
 .button {
-    -fx-background-color: #fb9964;
-    -fx-font-size: 12;
-}
-
-#addNewButton, #deleteButton {
-    -fx-background-color: #d7ea18;
-    -fx-font-weight: bold;
+    -fx-font-size: 10;
     -fx-border-radius: 20;
-    -fx-font-size: 12;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow( one-pass-box , #6f9ba3, 2 , 0.0 , 1 , 0 );
+}
+
+#saveButton:hover, #addNewButton:hover, #deleteButton:hover {
+    -fx-background-color: #797179;
+-fx-text-fill: #c5d1d3
 }
 
 
-#heritageTable {
+#addNewButton{
+    -fx-background-color: #da64dd;
+
+
+}
+
+ #saveButton{
+     -fx-background-color: #ee8827;
+
+
+ }
+
+#deleteButton{
+    -fx-background-color: #cada47;
+
+}
+
+  #heritageTable {
     -fx-background-radius: 7px 7px 0px 0px;
     -fx-font-size: 10;
     -fx-grid-lines-visible: false;

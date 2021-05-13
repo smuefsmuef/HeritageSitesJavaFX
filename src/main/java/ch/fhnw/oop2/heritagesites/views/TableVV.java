@@ -57,7 +57,8 @@ public class TableVV extends VBox {
 
 
         // layout of the table
-        // todo: maybe move to layoutControls();
+
+        // set id's'
         name.setId("name");
         category.setId("category");
         country.setId("country");
@@ -88,8 +89,7 @@ public class TableVV extends VBox {
     private void setupValueChangedListeners() {
 
         tableHeritage.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("oldValue: " + oldValue.getId());
-            System.out.println("newValue: " + newValue.getId());
+            System.out.println("new id: " + newValue.getId());
             model.setSelectedHeritageId(newValue.getId());
         });
     }
@@ -100,5 +100,4 @@ public class TableVV extends VBox {
 }
 
 
-// delete button
-//selectionModel.clearSelection();
+

@@ -1,12 +1,12 @@
 package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
-import javafx.beans.Observable;
+import com.sun.jdi.Value;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.util.converter.NumberStringConverter;
 
 public class FooterView extends HBox {
 
@@ -32,19 +32,19 @@ public class FooterView extends HBox {
     }
 
     private void layoutControls() {
-        setPadding(new Insets(5, 5,5, 10));
+        setPadding(new Insets(5, 5, 5, 10));
         setSpacing(10);
 
         setId("bottom");
 
         visitedSites = new Label("Sites visited: ");
-        visitedSitesCounter = new Label(" " + model.getVisitedSitesCounter());
+        visitedSitesCounter = new Label(" ");
 
         totalSites = new Label("Sites total: ");
         siteCounter = new Label(" " + model.getTotalSites());
 
         visitedCountries = new Label("Countries visited:");
-        countryCounter = new Label("" + model.getVisitedCountriesCounter());
+        countryCounter = new Label("");
 
         getChildren().addAll(visitedSites, visitedSitesCounter, totalSites, siteCounter, visitedCountries, countryCounter);
     }
@@ -56,10 +56,8 @@ public class FooterView extends HBox {
 
 
     private void setupBindings() {
-        System.out.println("wdssd" + model.getVisitedSitesCounter());
-     //  visitedSitesCounter.textProperty().bind(model.getVisitedSitesCounter());
-
+        visitedSitesCounter.textProperty().bind(model.visitedSitesProperty().asString());
+        countryCounter.textProperty().bind(model.visitedCountriesProperty().asString());
     }
-
 
 }

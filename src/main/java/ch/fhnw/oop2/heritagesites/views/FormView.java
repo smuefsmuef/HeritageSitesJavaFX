@@ -7,8 +7,11 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
+import java.awt.desktop.SystemSleepEvent;
+
 public class FormView extends GridPane {
     private final WorldHeritagesPM model;
+
     private Label title;
 
     private Label siteLabel;
@@ -48,9 +51,7 @@ public class FormView extends GridPane {
 
     public void initializeControls() {
 
-        title = new Label();
 
-        //
         siteLabel = new Label("Name");
         dateInscribedLabel = new Label("Year Inscribed");
         categoryLabel = new Label("Category");
@@ -60,7 +61,6 @@ public class FormView extends GridPane {
         descriptionLabel = new Label("Short Description");
         codeISOLabel = new Label("ISO Code");
         imageURLLabel = new Label("Image URL");
-
         siteField = new TextField();
         dateInscribedField = new TextField();
         regionField = new TextField();
@@ -73,15 +73,14 @@ public class FormView extends GridPane {
         descriptionField = new TextArea();
         statesField = new TextField();
 
+        title = new Label();
+title.setText("test");
     }
 
 
     private void layoutControls() {
-        // general stuff
         setPadding(new Insets(0, 10, 10, 10));
-//        visitedField.setSelected(model.getAllSites().get(0).isVisited());
         descriptionField.setId("descriptionField");
-
 
         // title
         setMargin(title, new Insets(5, 0, 5, 0));
@@ -137,26 +136,18 @@ public class FormView extends GridPane {
         add(visitedField, 1, 10, 1, 2);
 
         descriptionField.setWrapText(true);
-
-
     }
 
     private void setupEventHandlers() {
-        // everytimewe change the value here by an action we trigger tp update
-            visitedField.setOnAction(event -> model.getVisitedSitesCounter());
+         visitedField.setOnAction(event -> model.updateCounters());
     }
 
     private void setupValueChangedListeners() {
-
     }
 
     private void setupBindings() {
-
-       title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
-       
         HeritagePM proxy = model.getHeritageProxy();
 
-        System.out.println(proxy);
         categoryField.textProperty().bindBidirectional(proxy.categoryProperty());
         dateInscribedField.textProperty().bindBidirectional(proxy.dateInscribedProperty());
         imageURLField.textProperty().bindBidirectional(proxy.imgageURLProperty());
@@ -168,6 +159,7 @@ public class FormView extends GridPane {
         statesField.textProperty().bindBidirectional(proxy.statesProperty());
         visitedField.selectedProperty().bindBidirectional(proxy.visitedProperty());
 
+        title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
     }
 
 

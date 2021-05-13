@@ -2,9 +2,6 @@ package ch.fhnw.oop2.heritagesites.presentationModels;
 
 import javafx.beans.property.*;
 
-// heritagePM analog gemeimende
-// todo: seems alsook
-
 public class HeritagePM {
 
     private final StringProperty category = new SimpleStringProperty();
@@ -19,8 +16,22 @@ public class HeritagePM {
     private final StringProperty states = new SimpleStringProperty();
     private final BooleanProperty visited = new SimpleBooleanProperty();
 
-    public HeritagePM() {
+
+    public HeritagePM() { // set some defualz values to get an empty totle in the start of the applciation
+        setSite("");
+        setDateInscribed("");
     }
+
+    // todo add the rest...maybe
+    public HeritagePM(String site, String date, String category, String location, int id ) {
+        setVisited(false); // default
+        setCategory(category); // name from formfield
+        setLocation(location); // name from formfield
+        setSite(site); // name from formfield
+        setDateInscribed(date); // name from formfield
+        setId(id); // fortlaufend
+    }
+
 
     public HeritagePM(String[] line) {
         setCategory(line[0]);
@@ -185,4 +196,5 @@ public class HeritagePM {
     public void setVisited(boolean visited) {
         this.visited.set(visited);
     }
+
 }
