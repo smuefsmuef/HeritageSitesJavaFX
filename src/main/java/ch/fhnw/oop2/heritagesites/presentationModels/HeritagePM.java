@@ -19,6 +19,9 @@ public class HeritagePM {
     private final StringProperty states = new SimpleStringProperty();
     private final BooleanProperty visited = new SimpleBooleanProperty(false);
 
+    public HeritagePM() {
+    }
+
     public HeritagePM(String[] line) {
         setCategory(line[0]);
         setDateInscribed(line[1]);

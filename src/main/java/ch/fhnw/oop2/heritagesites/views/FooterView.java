@@ -1,16 +1,13 @@
 package ch.fhnw.oop2.heritagesites.views;
 
-import ch.fhnw.oop2.heritagesites.presentationModels.PM;
+import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import org.w3c.dom.Text;
 
 public class FooterView extends HBox {
 
-    private final PM model;
+    private final WorldHeritagesPM model;
 
     private Label visitedSites;
     private Label visitedSitesCounter;
@@ -19,7 +16,7 @@ public class FooterView extends HBox {
     private Label visitedCountries;
     private Label countryCounter;
 
-    public FooterView(PM model) {
+    public FooterView(WorldHeritagesPM model) {
         this.model = model;
         initializeControls();
         layoutControls();

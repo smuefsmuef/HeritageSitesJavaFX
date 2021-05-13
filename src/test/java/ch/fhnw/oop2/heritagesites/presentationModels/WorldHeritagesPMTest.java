@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PMTest {
+class WorldHeritagesPMTest {
 
 
     @Test
@@ -18,11 +18,11 @@ class PMTest {
         assertEquals("Hello World", demo.helloWorld());
     }
 
-    private PM gesamt;
+    private WorldHeritagesPM gesamt;
 
     @BeforeEach
     void setUp() throws FileNotFoundException {
-        gesamt = new PM();
+        gesamt = new WorldHeritagesPM();
     }
 
     @Test
@@ -49,14 +49,14 @@ class PMTest {
         gesamt.getAllSites().get(0).setCategory("No Category");
         // gesamt.save();
 
-        PM secondPM = new PM();
+        WorldHeritagesPM secondWorldHeritagesPM = new WorldHeritagesPM();
 
         //then
-        assertEquals(gesamt.getAllSites().size(), secondPM.getAllSites().size());
-        assertEquals("Natural", secondPM.getAllSites().get(0).getCategory());
+        assertEquals(gesamt.getAllSites().size(), secondWorldHeritagesPM.getAllSites().size());
+        assertEquals("Natural", secondWorldHeritagesPM.getAllSites().get(0).getCategory());
 
         for (int i = 1; i < gesamt.getAllSites().size(); i++) {
-            assertEquals(gesamt.getAllSites().get(i).getCategory(), secondPM.getAllSites().get(i).getCategory());
+            assertEquals(gesamt.getAllSites().get(i).getCategory(), secondWorldHeritagesPM.getAllSites().get(i).getCategory());
         }
 
         //after

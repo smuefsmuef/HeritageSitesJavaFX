@@ -1,6 +1,6 @@
 package ch.fhnw.oop2.heritagesites.views;
 
-import ch.fhnw.oop2.heritagesites.presentationModels.PM;
+import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 
@@ -11,7 +11,7 @@ import javafx.scene.layout.*;
 // bottom : to do here (advanced feature)
 
 public class ApplicationUI extends BorderPane {
-    private final PM model;
+    private final WorldHeritagesPM model;
     private SplitView split;
     private HeaderView top;
     private HBox bottom;
@@ -19,7 +19,7 @@ public class ApplicationUI extends BorderPane {
     private Button bottomButton;
 
 
-    public ApplicationUI(PM model) {
+    public ApplicationUI(WorldHeritagesPM model) {
         this.model = model;
         initializeControls();
         layoutControls();

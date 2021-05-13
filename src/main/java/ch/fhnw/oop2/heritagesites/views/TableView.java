@@ -1,7 +1,7 @@
 package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
-import ch.fhnw.oop2.heritagesites.presentationModels.PM;
+import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 
@@ -11,12 +11,12 @@ import javafx.scene.layout.VBox;
 // todo: everything seems fine here
 
 public class TableView extends VBox {
-    private final PM model;
+    private final WorldHeritagesPM model;
     private javafx.scene.control.TableView<HeritagePM> tableHeritage;
 
     public int idSite; // update
 
-    public TableView(PM model) {
+    public TableView(WorldHeritagesPM model) {
         this.model = model;
         initializeSelf();
         initializeControls();

@@ -1,20 +1,20 @@
 package ch.fhnw.oop2.heritagesites.views;
 
-import ch.fhnw.oop2.heritagesites.presentationModels.PM;
+import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 public class HeaderView extends HBox {
 
-        private final PM model;
+        private final WorldHeritagesPM model;
         
         private Button addNewButton = new Button("+");
         private Button deleteButton = new Button("-");
         private Button saveButton = new Button("Save");
 
 
-        public HeaderView(PM model) {
+        public HeaderView(WorldHeritagesPM model) {
             this.model = model;
             initializeControls();
             layoutControls();

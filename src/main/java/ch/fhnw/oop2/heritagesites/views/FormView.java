@@ -1,13 +1,13 @@
 package ch.fhnw.oop2.heritagesites.views;
 
 
-import ch.fhnw.oop2.heritagesites.presentationModels.PM;
+import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
 public class FormView extends GridPane {
-    private final PM model;
+    private final WorldHeritagesPM model;
     public TableView test; // todo: when table left changes (by click f.e.) then update here
     private Label title;
 
@@ -32,7 +32,7 @@ public class FormView extends GridPane {
     private CheckBox visitedField;
 
 
-    public FormView(PM model) {
+    public FormView(WorldHeritagesPM model) {
         this.model = model;
         initializeSelf();
         initializeControls();

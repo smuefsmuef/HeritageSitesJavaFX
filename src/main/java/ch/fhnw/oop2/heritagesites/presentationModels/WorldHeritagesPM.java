@@ -10,15 +10,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class PM {
+public class WorldHeritagesPM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
+
+    private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(-1);
+private final HeritagePM heritageProxy = new HeritagePM();
+
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
 
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
-    public PM() throws FileNotFoundException {
+
+    public WorldHeritagesPM() throws FileNotFoundException {
         System.out.println(getApplicationTitle());
         allSites.addAll(readFromFile());
     }
@@ -73,10 +78,10 @@ public class PM {
         }
     }
 
-    // todo add visited checkbox
-    public void storeVisitedStatus() {
 
-    }
+
+
+    ///  Save, Add, Remove
 
     // delete site
     public void deleteSite(HeritagePM eins) {
@@ -88,6 +93,7 @@ public class PM {
         allSites.add(getAllSites().get(0));
     }
 
+    ///  Counters
 
     // counter total sites, ok
     public int getTotalSites() {
@@ -106,6 +112,13 @@ public class PM {
         map(HeritagePM::getStates).distinct().count();
     }
 
+    /// Visited yes, no?
+
+    // todo add visited checkbox
+    public void storeVisitedStatus() {
+
+    }
+
     /// Getter & Setter
 
     public String getApplicationTitle() {
@@ -119,6 +132,11 @@ public class PM {
     public ObservableList<HeritagePM> getAllSites() {
         return allSites;
     }
+
+    public HeritagePM getHeritage(int id) {
+        return allSites.get(id);
+    }
+
 
 }
 
