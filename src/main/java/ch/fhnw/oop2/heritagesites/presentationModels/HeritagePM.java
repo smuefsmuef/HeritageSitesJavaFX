@@ -9,7 +9,7 @@ public class HeritagePM {
 
     private final StringProperty category = new SimpleStringProperty();
     private final StringProperty dateInscribed = new SimpleStringProperty();
-    private final StringProperty id = new SimpleStringProperty();
+    private final IntegerProperty  id = new SimpleIntegerProperty();
     private final StringProperty imgageURL = new SimpleStringProperty();
     private final StringProperty codeISO = new SimpleStringProperty();
     private final StringProperty location = new SimpleStringProperty();
@@ -17,7 +17,7 @@ public class HeritagePM {
     private final StringProperty description = new SimpleStringProperty();
     private final StringProperty site = new SimpleStringProperty();
     private final StringProperty states = new SimpleStringProperty();
-    private final BooleanProperty visited = new SimpleBooleanProperty(false);
+    private final BooleanProperty visited = new SimpleBooleanProperty();
 
     public HeritagePM() {
     }
@@ -25,7 +25,7 @@ public class HeritagePM {
     public HeritagePM(String[] line) {
         setCategory(line[0]);
         setDateInscribed(line[1]);
-        setId(line[2]);
+        setId(Integer.parseInt(line[2]));
         setImgageURL(line[3]);
         setCodeISO(line[4]);
         setLocation(line[5]);
@@ -33,21 +33,22 @@ public class HeritagePM {
         setDescription(line[7]);
         setSite(line[8]);
         setStates(line[9]);
-        setVisited(true);
+        setVisited(Boolean.parseBoolean("false")); // default wert
     }
 
     public String infoAsLine(String delimiter) {
         return String.join(delimiter,
-                getCategory(), //
+                getCategory(),
                 getDateInscribed(),
-                getId(),
+                Integer.toString(getId()),
                 getImgageURL(),
-                getCodeISO(), //
+                getCodeISO(),
                 getLocation(),
                 getRegion(),
                 getDescription(),
                 getSite(),
-                getStates()
+                getStates(),
+                Boolean.toString(isVisited())
         );
     }
 
@@ -77,15 +78,15 @@ public class HeritagePM {
         this.dateInscribed.set(dateInscribed);
     }
 
-    public String getId() {
+    public int getId() {
         return id.get();
     }
 
-    public StringProperty idProperty() {
+    public IntegerProperty idProperty() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id.set(id);
     }
 
@@ -173,7 +174,7 @@ public class HeritagePM {
         this.states.set(states);
     }
 
-    public boolean isVisited() {
+    public Boolean isVisited() {
         return visited.get();
     }
 
