@@ -64,18 +64,17 @@ public class FormView extends GridPane {
         imageURLLabel = new Label("Image URL");
 
         // todo atm 0 --> change to the clicked one
-        System.out.println(test.getIdSite()); // this is correct, gets the right value, but we need to update it
-        siteField = new TextField(model.getAllSites().get(test.getIdSite()).getSite());
-        dateInscribedField = new TextField(model.getAllSites().get(test.getIdSite()).getDateInscribed());
+        System.out.println(); // this is correct, gets the right value, but we need to update it
+        siteField = new TextField();
+        dateInscribedField = new TextField();
         regionField = new TextField();
         codeISOField = new TextField();
-        imageURLField = new Hyperlink(model.getAllSites().get(0).getImgageURL());
+        imageURLField = new Hyperlink();
         visitedField = new CheckBox("Visited");
-
         categoryField = new TextField();
         locationField = new TextField();
         dateInscribedField = new TextField();
-        descriptionField = new TextArea(model.getAllSites().get(0).getDescription());
+        descriptionField = new TextArea();
         statesField = new TextField();
 
         descriptionField.setId("descriptionField");
@@ -147,14 +146,14 @@ public class FormView extends GridPane {
     }
 
     private void setupEventHandlers() {
-
-        if (visitedField.isSelected() == false) {
-            System.out.println("set to true");
-            visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(true));
-        } else {
-            System.out.println("set to false");
-            visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(false));
-        }
+//
+//        if (visitedField.isSelected() == false) {
+//            System.out.println("set to true");
+//            visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(true));
+//        } else {
+//            System.out.println("set to false");
+//            visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(false));
+//        }
     }
 
     private void setupValueChangedListeners() {
@@ -162,7 +161,7 @@ public class FormView extends GridPane {
     }
 
     private void setupBindings() {
-        title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
+     //   title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
     }
 
 

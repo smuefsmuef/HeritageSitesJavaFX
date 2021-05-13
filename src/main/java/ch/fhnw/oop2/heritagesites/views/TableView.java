@@ -14,7 +14,7 @@ public class TableView extends VBox {
     private final WorldHeritagesPM model;
     private javafx.scene.control.TableView<HeritagePM> tableHeritage;
 
-    public int idSite; // update
+   // public int idSite; // update
 
     public TableView(WorldHeritagesPM model) {
         this.model = model;
@@ -82,7 +82,7 @@ public class TableView extends VBox {
     private void setupEventHandlers() {
         // todo: click on list element opens the event on the right
 
-        tableHeritage.setOnMouseClicked(event -> {
+       /* tableHeritage.setOnMouseClicked(event -> {
 
             System.out.println("hallooo, laufscvh=?");
             System.out.println(event);
@@ -97,7 +97,7 @@ public class TableView extends VBox {
             // String id = model.getAllSites().get(index).getId();
             setIdSite(index);
 
-        });
+        });*/
 
     }
 
@@ -107,11 +107,11 @@ public class TableView extends VBox {
     private void setupBindings() {
     }
 
-    public int getIdSite() {
+  /*  public int getIdSite() {
         return idSite;
     }
 
     public void setIdSite(int idSite) {
         this.idSite = idSite;
-    }
+    }*/
 }

@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class WorldHeritagesPM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
 
-    private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(-1);
-private final HeritagePM heritageProxy = new HeritagePM();
+   // private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(-1);
+//private final HeritagePM heritageProxy = new HeritagePM();
 
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
@@ -133,9 +133,9 @@ private final HeritagePM heritageProxy = new HeritagePM();
         return allSites;
     }
 
-    public HeritagePM getHeritage(int id) {
-        return allSites.get(id);
-    }
+  //  public HeritagePM getHeritage(int id) {
+    //    return allSites.get(id);
+    //}
 
 
 }
