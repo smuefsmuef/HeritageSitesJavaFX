@@ -1,6 +1,8 @@
 package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
+import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -54,10 +56,10 @@ public class FooterView extends HBox {
 
 
     private void setupBindings() {
-        System.out.println(model.getVisitedCountriesCounter());
-        visitedSitesCounter.textProperty().bind(new SimpleIntegerProperty(model.getVisitedSitesCounter()).asString());
-
+        System.out.println("wdssd" + model.getVisitedSitesCounter());
+     //  visitedSitesCounter.textProperty().bind(model.getVisitedSitesCounter());
 
     }
+
 
 }

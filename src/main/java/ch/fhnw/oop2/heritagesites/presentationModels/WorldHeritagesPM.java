@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.heritagesites.presentationModels;
 
+import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class WorldHeritagesPM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
 
-   private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(-1);
+   private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(0);
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
@@ -141,29 +142,33 @@ public class WorldHeritagesPM {
     }
 
 
-    ///  Save, Add, Remove
-
-    // delete site
-    public void deleteSite(HeritagePM eins) {
-        allSites.remove(eins);
-    }
+    ///  Save, Add, Remove Todo:
 
     // add site
     public void addSite() {
         allSites.add(getAllSites().get(0));
     }
 
-    ///  Counters
+    // delete site
+    public void deleteSite(HeritagePM eins) {
+        allSites.remove(eins);
+    }
+
+
+
+
+    ///  Counters // todo make sure the footer counters are updated after changing the checkboy visited
 
     // counter total sites, ok
     public int getTotalSites() {
         return (int) allSites.stream().count();
     }
 
-    // counter for visited sites, todo
+    // counter for visited sites
     public int getVisitedSitesCounter() {
-     return (int) allSites.stream().filter(s -> s.isVisited()).count();
+        return (int) allSites.stream().filter(s -> s.isVisited()).count();
     }
+
 
     // counter for visited countries, ok
     public int getVisitedCountriesCounter() {
@@ -172,12 +177,6 @@ public class WorldHeritagesPM {
         map(HeritagePM::getStates).distinct().count();
     }
 
-    /// Visited yes, no?
-
-    // todo add visited checkbox
-    public void storeVisitedStatus() {
-
-    }
 
     /// Getter & Setter
 

@@ -142,14 +142,8 @@ public class FormView extends GridPane {
     }
 
     private void setupEventHandlers() {
-//
-//        if (visitedField.isSelected() == false) {
-//            System.out.println("set to true");
-//            visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(true));
-//        } else {
-//            System.out.println("set to false");
-//            visitedField.setOnAction(event -> model.getAllSites().get(0).setVisited(false));
-//        }
+        // everytimewe change the value here by an action we trigger tp update
+            visitedField.setOnAction(event -> model.getVisitedSitesCounter());
     }
 
     private void setupValueChangedListeners() {
@@ -158,9 +152,8 @@ public class FormView extends GridPane {
 
     private void setupBindings() {
 
-     //   title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
-
-
+       title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
+       
         HeritagePM proxy = model.getHeritageProxy();
 
         System.out.println(proxy);
@@ -174,10 +167,6 @@ public class FormView extends GridPane {
         siteField.textProperty().bindBidirectional(proxy.siteProperty());
         statesField.textProperty().bindBidirectional(proxy.statesProperty());
         visitedField.selectedProperty().bindBidirectional(proxy.visitedProperty());
-
-
-
-// add the rest
 
     }
 
