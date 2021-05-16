@@ -18,6 +18,8 @@ public class FooterView extends HBox {
     private Label siteCounter;
     private Label visitedCountries;
     private Label countryCounter;
+    private Label visitedCountriesNames;
+    private Label countryNameCounter;
 
     public FooterView(WorldHeritagesPM model) {
         this.model = model;
@@ -37,16 +39,20 @@ public class FooterView extends HBox {
 
         setId("bottom");
 
+        totalSites = new Label("Sites total: ");
+        // to get the init value, note that for the otehr ones it doesnt matter atm, no stored values in db
+        siteCounter = new Label(" " + model.getTotalSites());
+
         visitedSites = new Label("Sites visited: ");
         visitedSitesCounter = new Label(" ");
 
-        totalSites = new Label("Sites total: ");
-        siteCounter = new Label(" " + model.getTotalSites());
-
-        visitedCountries = new Label("Countries visited:");
+        visitedCountries = new Label("Countries visited I:");
         countryCounter = new Label("");
 
-        getChildren().addAll(visitedSites, visitedSitesCounter, totalSites, siteCounter, visitedCountries, countryCounter);
+        visitedCountriesNames = new Label("Countries visited II:");
+        countryNameCounter = new Label("");
+
+        getChildren().addAll(totalSites, siteCounter, visitedSites, visitedSitesCounter, visitedCountries, countryCounter, visitedCountriesNames, countryNameCounter);
     }
 
 
@@ -56,8 +62,10 @@ public class FooterView extends HBox {
 
 
     private void setupBindings() {
+        siteCounter.textProperty().bind(model.sitesCounterProperty().asString());
         visitedSitesCounter.textProperty().bind(model.visitedSitesProperty().asString());
         countryCounter.textProperty().bind(model.visitedCountriesProperty().asString());
+        countryNameCounter.textProperty().bind(model.visitedCountriesNamesProperty());
     }
 
 }

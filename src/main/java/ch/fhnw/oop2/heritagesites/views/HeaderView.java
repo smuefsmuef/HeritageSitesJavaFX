@@ -50,10 +50,6 @@ public class HeaderView extends HBox {
 
 
     private void setupEventHandlers() {
-
-//selectionModel.clearSelection();
-
-
         // delete, ok
         deleteButton.setOnAction(event -> model.deleteSite(model.getSelectedHeritageId()));
 

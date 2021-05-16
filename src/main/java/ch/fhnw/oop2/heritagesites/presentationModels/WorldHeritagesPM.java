@@ -10,23 +10,26 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 
 public class WorldHeritagesPM {
     private final StringProperty applicationTitle = new SimpleStringProperty("World Heritage Sites");
-
     private final IntegerProperty selectedHeritageId = new SimpleIntegerProperty(-1);
     private final SimpleIntegerProperty visitedSites = new SimpleIntegerProperty();
     private final SimpleIntegerProperty visitedCountries = new SimpleIntegerProperty();
+    private final SimpleStringProperty visitedCountriesNames = new SimpleStringProperty();
+    private final SimpleIntegerProperty sitesCounter = new SimpleIntegerProperty();
+    private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
 
-    private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
-    private final HeritagePM heritageProxy = new HeritagePM(); // proxy to add bind all the views to the same object
+    // proxy to add bind all the views to the same object
+    private final HeritagePM heritageProxy = new HeritagePM();
 
 
     public WorldHeritagesPM() throws FileNotFoundException {
@@ -180,6 +183,9 @@ public class WorldHeritagesPM {
 
         System.out.println(lastOne.getSite());
         System.out.println(lastOne.getId());
+
+        updateCounters();
+
     }
 
     // delete site
@@ -191,33 +197,37 @@ public class WorldHeritagesPM {
                 break;
             }
         }
+        updateCounters();
     }
 
 
     //////////////////////////////////////  Counters  ////////////////////////////////
 
-    // counter total sites, works ok
-    public int getTotalSites() {
-        System.out.println("total Sites counter: " + (int) allSites.stream().count());
-        return (int) allSites.stream().count();
-    }
-
 
     public void updateCounters() {
+        getTotalSites();
         getVisitedSitesCounter();
         getVisitedCountriesCounter();
+        getVisitedCountriesName();
     }
 
+    // counter total sites
+    public int getTotalSites() {
+        int counter = (int) allSites.stream().count();
+        System.out.println("total Sites counter: " + counter);
+        setSitesCounter(counter);
+        return counter;
+    }
 
-    // counter for visited sites, works, ok
+    // counter for visited sites
     public int getVisitedSitesCounter() {
         int counter = (int) allSites.stream().filter(s -> s.isVisited()).count();
         System.out.println("visited Sites counter: " + counter);
         setVisitedSites(counter);
-        return  counter;
+        return counter;
     }
 
-    // counter for visited countries, ok todo
+    // counter for visited countries
     public int getVisitedCountriesCounter() {
         int counter = (int) allSites.stream().
                 filter(s -> s.isVisited()).
@@ -228,6 +238,14 @@ public class WorldHeritagesPM {
     }
 
     // counter string list all visited countries
+    public String getVisitedCountriesName() {
+        String list = allSites.stream().
+                filter(s -> s.isVisited()).
+                map(HeritagePM::getCodeISO).distinct().collect(joining(", "));
+        System.out.println("list visited countries: " + list);
+        setVisitedCountriesNames(list);
+        return list;
+    }
 
 
     //////////////////////////////////////  Getter & Setter  ////////////////////////////////
@@ -281,6 +299,30 @@ public class WorldHeritagesPM {
 
     public void setVisitedCountries(int visitedCountries) {
         this.visitedCountries.set(visitedCountries);
+    }
+
+    public String getVisitedCountriesNames() {
+        return visitedCountriesNames.get();
+    }
+
+    public SimpleStringProperty visitedCountriesNamesProperty() {
+        return visitedCountriesNames;
+    }
+
+    public void setVisitedCountriesNames(String visitedCountriesNames) {
+        this.visitedCountriesNames.set(visitedCountriesNames);
+    }
+
+    public int getSitesCounter() {
+        return sitesCounter.get();
+    }
+
+    public SimpleIntegerProperty sitesCounterProperty() {
+        return sitesCounter;
+    }
+
+    public void setSitesCounter(int sitesCounter) {
+        this.sitesCounter.set(sitesCounter);
     }
 }
 
