@@ -25,6 +25,7 @@ public class WorldHeritagesPM {
 
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
+    private static final String csf_file_direct = "/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
 
 
@@ -59,7 +60,7 @@ public class WorldHeritagesPM {
             return reader
                     .lines()
                     .skip(1) // skip first line, header
-                    .map(line -> new HeritagePM(line.replaceAll(";;;;", "").split(DELIMITER, 10))) // 10,  transform each line into an obect
+                    .map(line -> new HeritagePM(line.replaceAll(";;;;", "").split(DELIMITER, 10))) // 10,  transform each line into an object
                     .collect(toList());
         } catch (IOException e) {
             throw new IllegalStateException("no bueno - file not found");
@@ -73,10 +74,10 @@ public class WorldHeritagesPM {
     }
 
 
-    // add new entry
+    // save current state of list into csv
     public void save() {
-        try (BufferedWriter writer = getWriter(csv_file)) {
-            writer.write("Das;ist;einTest");
+        try (BufferedWriter writer = getWriter(csf_file_direct)) { // todo: i use a different file path to read in, maybe change
+            writer.write("Category;Date inscribed;ID;Image URL;Code ISO;Location;Region;Short Description;Site;States;;;;");
             writer.newLine();
             allSites.stream()
                     .map(result -> result.infoAsLine(DELIMITER))
@@ -169,7 +170,7 @@ public class WorldHeritagesPM {
     }
 
     // add site
-    public void saveSite() { // todo
+    public void saveSite() { // todo: save means to save to the csv... we already have a save method...use this one instead to open, add a new one
         // add the  filled form, give a new id
         // allSites.add(new HeritagePM("dsdasd", "kj", "sfsdf", "sdasd", getLastId() + 1));
         System.out.println("lastindex" + getNextId());

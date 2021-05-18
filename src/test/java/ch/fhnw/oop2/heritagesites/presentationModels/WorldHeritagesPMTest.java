@@ -34,7 +34,7 @@ class WorldHeritagesPMTest {
         assertTrue(resulate.size() > 1);
         assertEquals("Natural", resulate.get(0).getCategory());
         assertEquals("Natural", resulate.get(resulate.size() - 1).getCategory());
-        assertEquals("154", resulate.get(0).getId());
+        assertEquals(154, resulate.get(0).getId());
         assertEquals("Australia", resulate.get(0).getStates());
         assertEquals("Great Barrier Reef", resulate.get(0).getSite());
     }
@@ -43,11 +43,12 @@ class WorldHeritagesPMTest {
     @Test
     void testSave() throws FileNotFoundException {
         //given
-// todo: fix test for save method
+        //
+        // todo: fix test for save method
 
         //when
         gesamt.getAllSites().get(0).setCategory("No Category");
-        // gesamt.save();
+        gesamt.save();
 
         WorldHeritagesPM secondWorldHeritagesPM = new WorldHeritagesPM();
 
@@ -61,7 +62,9 @@ class WorldHeritagesPMTest {
 
         //after
         gesamt.getAllSites().get(0).setCategory("Aliens");
-      //  gesamt.save();
+       gesamt.save();
+        //then
+        assertEquals("Natural", secondWorldHeritagesPM.getAllSites().get(0).getCategory());
     }
 
 

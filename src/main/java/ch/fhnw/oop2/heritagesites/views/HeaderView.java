@@ -12,7 +12,7 @@ public class HeaderView extends HBox {
 
     private Button addNewButton = new Button("Create Site");
     private Button deleteButton = new Button("Remove Site");
-    private Button saveButton = new Button("Save new Site");
+    private Button saveButton = new Button("Save");
 
 
     public HeaderView(WorldHeritagesPM model) {
@@ -44,7 +44,7 @@ public class HeaderView extends HBox {
         saveButton.setPrefSize(100, 15);
         saveButton.setId("saveButton");
 
-        getChildren().addAll(addNewButton, saveButton, deleteButton);
+        getChildren().addAll(addNewButton, deleteButton, saveButton);
 
     }
 
@@ -58,7 +58,7 @@ public class HeaderView extends HBox {
 
 
         // todo: save stored values and add to list
-        saveButton.setOnAction(event -> model.saveSite());
+        saveButton.setOnAction(event -> model.save());
 
     }
 
