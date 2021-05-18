@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.util.stream.Collectors.joining;
@@ -210,7 +211,8 @@ public class WorldHeritagesPM {
 
     // counter total sites
     public int getTotalSites() {
-        int counter = (int) allSites.stream().count();
+        int counter = (int) allSites.stream()
+                .count();
         System.out.println("total Sites counter: " + counter);
         setSitesCounter(counter);
         return counter;
@@ -218,7 +220,9 @@ public class WorldHeritagesPM {
 
     // counter for visited sites
     public int getVisitedSitesCounter() {
-        int counter = (int) allSites.stream().filter(s -> s.isVisited()).count();
+        int counter = (int) allSites.stream()
+                .filter(s -> s.isVisited())
+                .count();
         System.out.println("visited Sites counter: " + counter);
         setVisitedSites(counter);
         return counter;
@@ -226,9 +230,12 @@ public class WorldHeritagesPM {
 
     // counter for visited countries
     public int getVisitedCountriesCounter() {
-        int counter = (int) allSites.stream().
-                filter(s -> s.isVisited()).
-                map(HeritagePM::getStates).distinct().count();
+        int counter = (int) allSites.stream()
+                .filter(s -> s.isVisited())
+                .map(v -> Arrays.asList(v.getCodeISO().split(",")))
+                .flatMap(List::stream)
+                .distinct()
+                .count();
         System.out.println("total visited countries: " + counter);
         setVisitedCountries(counter);
         return counter;
@@ -236,9 +243,12 @@ public class WorldHeritagesPM {
 
     // counter string list all visited countries
     public String getVisitedCountriesName() {
-        String list = allSites.stream().
-                filter(s -> s.isVisited()).
-                map(HeritagePM::getCodeISO).distinct().collect(joining(", "));
+        String list = allSites.stream()
+                .filter(s -> s.isVisited())
+                .map(v -> Arrays.asList(v.getCodeISO().split(",")))
+                .flatMap(List::stream)
+                .distinct()
+                .collect(joining(", "));
         System.out.println("list visited countries: " + list);
         setVisitedCountriesNames(list);
         return list;
