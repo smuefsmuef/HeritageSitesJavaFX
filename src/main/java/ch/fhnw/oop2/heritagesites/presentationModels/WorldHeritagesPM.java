@@ -1,6 +1,5 @@
 package ch.fhnw.oop2.heritagesites.presentationModels;
 
-import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +7,6 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -150,9 +148,10 @@ public class WorldHeritagesPM {
     }
 
 
-    //////////////////////////////////////  Save, Add, Remove ////////////////////////////////
+    //////////////////////////////////////  Add & Remove ////////////////////////////////
 
 
+    // get the next free id
     public int getNextId() {
         int idtest = 0;
         for (HeritagePM site : allSites) {
@@ -164,13 +163,10 @@ public class WorldHeritagesPM {
     }
 
     // save
-    public void addSite() { // todo
-// open only a new form for new proxy, id -1
-// System.out.println(allSites.get(allSites.lastIndexOf(allSites)));
-    }
+    public void addSite() { // todo: save means to save to the csv... we already have a save method...use this one instead to open, add a new one
+        // open  a new form for new proxy, id -1
+        // System.out.println(allSites.get(allSites.lastIndexOf(allSites)));
 
-    // add site
-    public void saveSite() { // todo: save means to save to the csv... we already have a save method...use this one instead to open, add a new one
         // add the  filled form, give a new id
         // allSites.add(new HeritagePM("dsdasd", "kj", "sfsdf", "sdasd", getLastId() + 1));
         System.out.println("lastindex" + getNextId());
@@ -186,8 +182,8 @@ public class WorldHeritagesPM {
         System.out.println(lastOne.getId());
 
         updateCounters();
-
     }
+
 
     // delete site
     public void deleteSite(int eins) {

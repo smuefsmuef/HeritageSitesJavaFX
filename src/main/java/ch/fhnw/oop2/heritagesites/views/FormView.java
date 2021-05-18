@@ -50,8 +50,6 @@ public class FormView extends GridPane {
     }
 
     public void initializeControls() {
-
-
         siteLabel = new Label("Name");
         dateInscribedLabel = new Label("Year Inscribed");
         categoryLabel = new Label("Category");
@@ -74,10 +72,9 @@ public class FormView extends GridPane {
         statesField = new TextField();
 
         title = new Label();
-title.setText("test");
+        title.setText("test");
     }
-
-
+    
     private void layoutControls() {
         setPadding(new Insets(0, 10, 10, 10));
         descriptionField.setId("descriptionField");
@@ -139,7 +136,7 @@ title.setText("test");
     }
 
     private void setupEventHandlers() {
-         visitedField.setOnAction(event -> model.updateCounters());
+        visitedField.setOnAction(event -> model.updateCounters());
     }
 
     private void setupValueChangedListeners() {

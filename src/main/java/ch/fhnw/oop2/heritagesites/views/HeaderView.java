@@ -33,7 +33,6 @@ public class HeaderView extends HBox {
 
         setId("top");
 
-
         addNewButton.setPrefSize(100, 15);
         addNewButton.setId("addNewButton");
 
@@ -56,8 +55,7 @@ public class HeaderView extends HBox {
         // todo: open a new empty form, mayve -1
         addNewButton.setOnAction(event -> model.addSite());
 
-
-        // todo: save stored values and add to list
+        // save current list
         saveButton.setOnAction(event -> model.save());
 
     }

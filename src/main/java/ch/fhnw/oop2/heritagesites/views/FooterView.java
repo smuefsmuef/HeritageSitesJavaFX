@@ -40,7 +40,7 @@ public class FooterView extends HBox {
         setId("bottom");
 
         totalSites = new Label("Sites total: ");
-        // to get the init value, note that for the otehr ones it doesnt matter atm, no stored values in db
+        // ok so, to get the init value, note that for the other ones it doesnt matter atm, no stored values in db
         siteCounter = new Label(" " + model.getTotalSites());
 
         visitedSites = new Label("Sites visited: ");

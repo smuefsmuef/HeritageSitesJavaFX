@@ -17,20 +17,20 @@ public class HeritagePM {
     private final BooleanProperty visited = new SimpleBooleanProperty();
 
 
-    public HeritagePM() { // set some defualz values to get an empty totle in the start of the applciation
+    public HeritagePM() { // set some default values to get an empty title in the start of the applciation
         setSite("");
         setDateInscribed("");
     }
 
-    // todo add the rest...maybe
-    public HeritagePM(String site, String date, String category, String location, int id ) {
-        setVisited(false); // default
-        setCategory(category); // name from formfield
-        setLocation(location); // name from formfield
-        setSite(site); // name from formfield
-        setDateInscribed(date); // name from formfield
-        setId(id); // fortlaufend
-    }
+//    // todo add the rest...maybe
+//    public HeritagePM(String site, String date, String category, String location, int id ) {
+//        setVisited(false); // default
+//        setCategory(category); // name from formfield
+//        setLocation(location); // name from formfield
+//        setSite(site); // name from formfield
+//        setDateInscribed(date); // name from formfield
+//        setId(id); // fortlaufend
+//    }
 
 
     public HeritagePM(String[] line) {

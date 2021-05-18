@@ -2,12 +2,8 @@ package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
-
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -34,8 +30,6 @@ public class TableVV extends VBox {
 
     public void initializeControls() {
         tableHeritage = initializeTable();
-
-        // get selection model
     }
 
     private TableView<HeritagePM> initializeTable() {
@@ -77,7 +71,6 @@ public class TableVV extends VBox {
     private void layoutControls() {
         setVgrow(tableHeritage, Priority.ALWAYS);
         getChildren().addAll(tableHeritage);
-
         tableHeritage.setId("heritageTable");
         setMargin(tableHeritage, new Insets(7));
     }
