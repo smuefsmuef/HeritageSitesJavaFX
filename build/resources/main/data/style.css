@@ -1,28 +1,34 @@
+.root{
+    /*-fx-font-size: 16pt;*/
+    -fx-font-family: "Courier New";
+    -fx-base: rgb(184, 203, 66);
+    /*-fx-base: rgb(132, 145, 47);*/
+    -fx-background: rgb(225, 228, 203);
+}
+
 FormView{
     -fx-start-margin: 50;
     -fx-font-size: 10;
     -fx-grid-lines-visible: false;
     -fx-background-color: transparent;
-
 }
 
-FormView .text-area{
-    -fx-text-fill: #212751;
+FormView .text-area {
+    /*-fx-text-fill: #6f7383;*/
 }
 
 SplitView {
-    -fx-background-color: linear-gradient(to top, #1dbbdd44, #93f9b944);
+    -fx-background-color: linear-gradient(to top, #536976, #BBD2C5);
 }
 
 
 #top {
-    -fx-background-color: #93f9b944;
-    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+    -fx-background-color: #BBD2C5;
     -fx-background-position: right center;
 }
 
 #bottom {
-    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+    -fx-background-color: #536976;
     -fx-font-size: 8;
     -fx-text-alignment: right;
 
@@ -49,8 +55,6 @@ SplitView {
 
  #saveButton{
      -fx-background-color: #ee8827;
-
-
  }
 
 #deleteButton{
@@ -85,7 +89,7 @@ SplitView {
 }
 
 .table-view .column-header-background {
-    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+    -fx-background-color: #859b9c;
     -fx-background-radius: 7px 7px 0px 0px;
     -fx-background-insets: 0 11px 0 0;
     -fx-padding: 0 0 5px 0;
@@ -151,7 +155,9 @@ SplitView {
 }
 
 .split-pane:horizontal > .split-pane-divider {
-    -fx-background-color: #92c6d0;
+    /*-fx-background-color: #bad1c4;*/
+    -fx-background-color: linear-gradient(to bottom, #536976, #BBD2C5);
+
 }
 
 .split-pane-divider {
