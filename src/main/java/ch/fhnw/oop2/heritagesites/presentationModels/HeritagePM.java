@@ -22,16 +22,11 @@ public class HeritagePM {
         setDateInscribed("");
     }
 
-//    // todo add the rest...maybe
-//    public HeritagePM(String site, String date, String category, String location, int id ) {
-//        setVisited(false); // default
-//        setCategory(category); // name from formfield
-//        setLocation(location); // name from formfield
-//        setSite(site); // name from formfield
-//        setDateInscribed(date); // name from formfield
-//        setId(id); // fortlaufend
-//    }
-
+    public HeritagePM(int id) { // set some default values to get an empty title in the start of the applciation
+        setSite("New Site");
+        setDateInscribed("2021");
+        setId(id);
+    }
 
     public HeritagePM(String[] line) {
         setCategory(line[0]);

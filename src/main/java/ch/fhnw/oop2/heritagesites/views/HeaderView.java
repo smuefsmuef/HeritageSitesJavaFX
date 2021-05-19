@@ -1,6 +1,5 @@
 package ch.fhnw.oop2.heritagesites.views;
 
-import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -39,7 +38,6 @@ public class HeaderView extends HBox {
         deleteButton.setPrefSize(100, 15);
         deleteButton.setId("deleteButton");
 
-
         saveButton.setPrefSize(100, 15);
         saveButton.setId("saveButton");
 
@@ -49,10 +47,10 @@ public class HeaderView extends HBox {
 
 
     private void setupEventHandlers() {
-        // delete, ok
+        // delete site
         deleteButton.setOnAction(event -> model.deleteSite(model.getSelectedHeritageId()));
 
-        // todo: open a new empty form, mayve -1
+        // add site
         addNewButton.setOnAction(event -> model.addSite());
 
         // save current list
@@ -65,5 +63,6 @@ public class HeaderView extends HBox {
 
 
     }
+
 
 }

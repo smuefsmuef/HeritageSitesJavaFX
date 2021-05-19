@@ -48,6 +48,8 @@ public class WorldHeritagesPM {
             }
         });
 
+        setSelectedHeritageId(154);
+
     }
 
 
@@ -164,24 +166,10 @@ public class WorldHeritagesPM {
     }
 
     // save
-    public void addSite() { // todo: save means to save to the csv... we already have a save method...use this one instead to open, add a new one
-        // open  a new form for new proxy, id -1
-        // System.out.println(allSites.get(allSites.lastIndexOf(allSites)));
-
-        // add the  filled form, give a new id
-        // allSites.add(new HeritagePM("dsdasd", "kj", "sfsdf", "sdasd", getLastId() + 1));
-        System.out.println("lastindex" + getNextId());
-
-        //allSites.add();
-        allSites.add(getHeritageProxy());
-
-
-        HeritagePM lastOne = allSites.get(allSites.size() - 1);
-        lastOne.setId(getNextId());
-
-        System.out.println(lastOne.getSite());
-        System.out.println(lastOne.getId());
-
+    public void addSite() {
+        allSites.add(new HeritagePM(getNextId()));
+       int lastOne = allSites.get(allSites.size() - 1).getId();
+        setSelectedHeritageId(lastOne);
         updateCounters();
     }
 

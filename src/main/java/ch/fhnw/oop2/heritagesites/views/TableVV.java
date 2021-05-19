@@ -7,8 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-// todo: everything seems fine here
-
 public class TableVV extends VBox {
     private final WorldHeritagesPM model;
     private TableView<HeritagePM> tableHeritage;
