@@ -1,12 +1,10 @@
-.root{
-    /*-fx-font-size: 16pt;*/
-    -fx-font-family: "Courier New";
+.root {
     -fx-base: rgb(184, 203, 66);
-    /*-fx-base: rgb(132, 145, 47);*/
     -fx-background: rgb(225, 228, 203);
+    -fx-font-family: "Courier New";
 }
 
-FormView{
+FormView {
     -fx-start-margin: 50;
     -fx-font-size: 10;
     -fx-grid-lines-visible: false;
@@ -20,7 +18,6 @@ FormView .text-area {
 SplitView {
     -fx-background-color: linear-gradient(to top, #536976, #BBD2C5);
 }
-
 
 #top {
     -fx-background-color: #BBD2C5;
@@ -38,41 +35,43 @@ SplitView {
     -fx-font-size: 10;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
-    -fx-effect: dropshadow( one-pass-box , #6f9ba3, 2 , 0.0 , 1 , 0 );
+    -fx-effect: dropshadow(one-pass-box, #6f9ba3, 2, 0.0, 1, 0);
 }
 
 #saveButton:hover, #addNewButton:hover, #deleteButton:hover {
     -fx-background-color: #797179;
--fx-text-fill: #c5d1d3
+    -fx-text-fill: #c5d1d3
 }
 
-
-#addNewButton{
-    -fx-background-color: #da64dd;
-
-
+#saveButton:pressed, #addNewButton:pressed, #deleteButton:pressed {
+    -fx-background-color: #dd2fdd;
+    -fx-text-fill: #c5d1d3
 }
 
- #saveButton{
-     -fx-background-color: #ee8827;
- }
-
-#deleteButton{
+#addNewButton {
     -fx-background-color: #cada47;
-
 }
 
-  #heritageTable {
+#saveButton {
+    -fx-background-color: #cada47;
+}
+
+#deleteButton {
+    -fx-background-color: #cada47;
+}
+
+#heritageTable {
     -fx-background-radius: 7px 7px 0px 0px;
     -fx-font-size: 10;
     -fx-grid-lines-visible: false;
     -fx-background-color: transparent;
 }
 
-
 #formTitle {
     -fx-font-size: 20;
-    -fx-text-fill: #ba3bfc;
+    -fx-text-fill: #cb4cec;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
 }
 
 .table-view {
@@ -103,6 +102,7 @@ SplitView {
 .table-view .column-header-background .filler .label {
     -fx-font-weight: bold;
     -fx-alignment: CENTER-LEFT;
+    -fx-padding: 2 0 0 10;
 }
 
 .table-view .table-cell {
@@ -112,7 +112,7 @@ SplitView {
 
 .table-row-cell: hover {
     -fx-background-color: #93f9b911;
-    -fx-text-background-color: #b43ad3;
+    -fx-text-background-color: #cb4cec;
 }
 
 .table-row-cell: selected {
@@ -161,7 +161,7 @@ SplitView {
 }
 
 .split-pane-divider {
-    -fx-padding: 0.1 ;
+    -fx-padding: 0.1;
 }
 
 
