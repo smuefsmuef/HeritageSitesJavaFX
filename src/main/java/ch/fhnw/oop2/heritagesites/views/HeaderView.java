@@ -13,6 +13,7 @@ public class HeaderView extends HBox {
     private Button deleteButton = new Button("Remove Site");
     private Button saveButton = new Button("Save");
 
+    // https://code.makery.ch/blog/javafx-8-tableview-sorting-filtering/
 
     public HeaderView(WorldHeritagesPM model) {
         this.model = model;

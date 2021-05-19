@@ -2,6 +2,8 @@ package ch.fhnw.oop2.heritagesites.presentationModels;
 
 import javafx.beans.property.*;
 
+import java.util.Calendar;
+
 public class HeritagePM {
 
     private final StringProperty category = new SimpleStringProperty();
@@ -24,7 +26,7 @@ public class HeritagePM {
 
     public HeritagePM(int id) { // set some default values to get an empty title in the start of the applciation
         setSite("New Site");
-        setDateInscribed("2021");
+        setDateInscribed(getYearAsString());
         setId(id);
     }
 
@@ -56,6 +58,11 @@ public class HeritagePM {
                 getStates(),
                 Boolean.toString(isVisited())
         );
+    }
+
+    public String getYearAsString() {
+        return String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+
     }
 
     // getter & setter

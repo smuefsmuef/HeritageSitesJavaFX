@@ -154,7 +154,7 @@ public class WorldHeritagesPM {
     //////////////////////////////////////  Add & Remove ////////////////////////////////
 
 
-    // get the next free id
+    // get the next free id - additional?
     public int getNextId() {
         int idtest = 0;
         for (HeritagePM site : allSites) {

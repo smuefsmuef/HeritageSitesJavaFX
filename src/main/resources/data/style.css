@@ -19,6 +19,7 @@ SplitView {
     -fx-background-color: linear-gradient(to top, #536976, #BBD2C5);
 }
 
+
 #top {
     -fx-background-color: #BBD2C5;
     -fx-background-position: right center;
@@ -27,8 +28,6 @@ SplitView {
 #bottom {
     -fx-background-color: #536976;
     -fx-font-size: 8;
-    -fx-text-alignment: right;
-
 }
 
 .button {
