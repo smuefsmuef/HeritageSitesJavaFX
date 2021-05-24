@@ -8,26 +8,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class HeaderView extends HBox {
-
     private final WorldHeritagesPM model;
 
-    private Button addNewButton = new Button("Create Site");
-    private Button deleteButton = new Button("Remove Site");
-    private Button saveButton = new Button("Save");
-
-    private TextField searchBox = new TextField("");
+    private Button addNewButton;
+    private Button deleteButton;
+    private Button saveButton;
+    private TextField searchBox;
 
     public HeaderView(WorldHeritagesPM model) {
         this.model = model;
         initializeControls();
         layoutControls();
-        setupBindings();
         setupEventHandlers();
         setupValueChangedListeners();
     }
 
     private void initializeControls() {
-
+        addNewButton = new Button("Create Site");
+        deleteButton = new Button("Remove Site");
+        saveButton = new Button("Save");
+        searchBox = new TextField("");
     }
 
     private void layoutControls() {
@@ -52,9 +52,7 @@ public class HeaderView extends HBox {
         saveButton.setDisable(true);
 
         getChildren().addAll(addNewButton, deleteButton, saveButton, searchBox);
-
     }
-
 
     private void setupEventHandlers() {
         // delete site
@@ -67,30 +65,21 @@ public class HeaderView extends HBox {
         saveButton.setOnAction(event -> model.save());
     }
 
-
-    private void setupBindings() {
-
-    }
-
     private void setupValueChangedListeners() {
         HeritagePM proxy = model.getHeritageProxy();
 
         // disable buttons until some actions are done
         proxy.idProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue.intValue() == 0) {
-            deleteButton.setDisable(false);
-            saveButton.setDisable(false);
+                deleteButton.setDisable(false);
+                saveButton.setDisable(false);
             }
         });
-
-
+        
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("predicate: new is " + newValue);
-                model.getFilteredData().setPredicate( model.createPredicate(newValue));
+            model.getFilteredData().setPredicate(model.createPredicate(newValue));
         });
-
-
     }
-
 
 }

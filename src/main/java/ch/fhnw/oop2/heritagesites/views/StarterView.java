@@ -1,6 +1,5 @@
 package ch.fhnw.oop2.heritagesites.views;
 
-
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -12,24 +11,22 @@ public class StarterView extends BorderPane {
     String icon = getClass().getResource("/data/info.png").toString();
     BackgroundImage myBI;
 
-    private Label petra = new Label("Petra Kohler - FS2021");
-    private Label title = new Label("World Heritage Site FX");
+    private Label petra;
+    private Label title;
 
     public StarterView(WorldHeritagesPM model) {
         this.model = model;
-        initializeSelf();
         initializeControls();
         layoutControls();
-    }
-
-    private void initializeSelf() {
-        // css file in app starter, will be universal for all UI
     }
 
     public void initializeControls() {
         myBI = new BackgroundImage(new Image(icon, 350, 350, false, true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 BackgroundSize.DEFAULT);
+
+        petra = new Label("Petra Kohler - FS2021");
+        title = new Label("World Heritage Site FX");
     }
 
     private void layoutControls() {

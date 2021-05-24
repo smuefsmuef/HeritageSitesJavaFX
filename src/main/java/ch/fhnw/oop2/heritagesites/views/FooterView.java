@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 public class FooterView extends HBox {
-
     private final WorldHeritagesPM model;
 
     private Label visitedSitesCounter;
@@ -19,17 +18,9 @@ public class FooterView extends HBox {
         initializeControls();
         layoutControls();
         setupBindings();
-        setupEventHandlers();
     }
 
     private void initializeControls() {
-
-    }
-
-    private void layoutControls() {
-        setPadding(new Insets(5, 5, 5, 10));
-        setSpacing(10);
-
         Label totalSites = new Label("Sites total: ");
         siteCounter = new Label(" " + model.totalSites());         // to get the init value, note that for the other ones it doesnt matter atm, no stored values in db
 
@@ -45,11 +36,10 @@ public class FooterView extends HBox {
         getChildren().addAll(totalSites, siteCounter, visitedSites, visitedSitesCounter, visitedCountries, countryCounter, visitedCountriesNames, countryNameCounter);
     }
 
-
-    private void setupEventHandlers() {
-
+    private void layoutControls() {
+        setPadding(new Insets(5, 5, 5, 10));
+        setSpacing(10);
     }
-
 
     private void setupBindings() {
         siteCounter.textProperty().bind(model.sitesCounterProperty().asString());

@@ -12,24 +12,19 @@ import javafx.scene.layout.VBox;
 public class TableVV extends VBox {
     private final WorldHeritagesPM model;
     private TableView<HeritagePM> tableHeritage;
+    private TableView<HeritagePM> tableView;
 
 
     public TableVV(WorldHeritagesPM model) {
         this.model = model;
-        initializeSelf();
         initializeControls();
         layoutControls();
-        setupEventHandlers();
         setupValueChangedListeners();
         setupBindings();
     }
 
-    private void initializeSelf() {
-        // css file in app starter, will be universal for all UI
-    }
-
     public void initializeControls() {
-        TableView<HeritagePM> tableView = new TableView<>(model.getSortedList());
+        tableView = new TableView<>(model.getSortedList());
         tableHeritage = initializeTable(tableView);
     }
 
@@ -58,7 +53,6 @@ public class TableVV extends VBox {
 
         tableView.getColumns().addAll(visited, name, category, country, states);
 
-
         // layout of the table
 
         // set id's'
@@ -75,7 +69,6 @@ public class TableVV extends VBox {
         category.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
         country.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
         states.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
-
 
         // event handler
         // edit some table columns: name, Category, Country, State
@@ -124,7 +117,6 @@ public class TableVV extends VBox {
                 }
         );
 
-
         return tableView;
     }
 
@@ -135,21 +127,14 @@ public class TableVV extends VBox {
         setMargin(tableHeritage, new Insets(7));
     }
 
-    private void setupEventHandlers() {
-
-    }
-
     private void setupValueChangedListeners() {
         tableHeritage.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             model.setSelectedHeritageId(newValue.getId());
         });
-
-
     }
 
     private void setupBindings() {
         model.getSortedList().comparatorProperty().bind(tableHeritage.comparatorProperty());
-
     }
 
 }

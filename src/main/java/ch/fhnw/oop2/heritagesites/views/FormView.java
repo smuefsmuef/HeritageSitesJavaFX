@@ -1,6 +1,5 @@
 package ch.fhnw.oop2.heritagesites.views;
 
-
 import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
@@ -31,19 +30,12 @@ public class FormView extends GridPane {
     private Hyperlink imageURLField;
     private CheckBox visitedField;
 
-
     public FormView(WorldHeritagesPM model) {
         this.model = model;
-        initializeSelf();
         initializeControls();
         layoutControls();
         setupEventHandlers();
-        setupValueChangedListeners();
         setupBindings();
-    }
-
-    private void initializeSelf() {
-        // css file in app starter, will be universal for all UI
     }
 
     public void initializeControls() {
@@ -67,7 +59,6 @@ public class FormView extends GridPane {
         dateInscribedField = new TextField();
         descriptionField = new TextArea();
         statesField = new TextField();
-
         title = new Label();
         title.setText("test");
     }
@@ -79,7 +70,6 @@ public class FormView extends GridPane {
         // title
         setMargin(title, new Insets(5, 0, 5, 0));
         title.setId("formTitle");
-
 
         //// Form table
 
@@ -136,9 +126,6 @@ public class FormView extends GridPane {
         visitedField.setOnAction(event -> model.updateCounters());
     }
 
-    private void setupValueChangedListeners() {
-    }
-
     private void setupBindings() {
         HeritagePM proxy = model.getHeritageProxy();
 
@@ -152,9 +139,7 @@ public class FormView extends GridPane {
         siteField.textProperty().bindBidirectional(proxy.siteProperty());
         statesField.textProperty().bindBidirectional(proxy.statesProperty());
         visitedField.selectedProperty().bindBidirectional(proxy.visitedProperty());
-
         title.textProperty().bind(siteField.textProperty().concat(" - ").concat(dateInscribedField.textProperty()));
     }
-
 
 }

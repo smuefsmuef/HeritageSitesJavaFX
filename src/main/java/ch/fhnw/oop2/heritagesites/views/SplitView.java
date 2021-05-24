@@ -6,6 +6,7 @@ import javafx.scene.control.SplitPane;
 
 public class SplitView extends SplitPane {
     private final WorldHeritagesPM model;
+
     TableVV left;
     FormView right;
     StarterView rightInitialView;
@@ -13,21 +14,22 @@ public class SplitView extends SplitPane {
 
     public SplitView(WorldHeritagesPM model) {
         this.model = model;
+        initializeControls();
         layoutControls();
         setupValueChangedListeners();
-
     }
 
-    private void layoutControls() {
+    private void initializeControls() {
         // table on the right
         rightInitialView = new StarterView(model);
         right = new FormView(model);
 
         // table on the left
         left = new TableVV(model);
+    }
 
+    private void layoutControls() {
         getItems().addAll(left, rightInitialView);
-
         // fyi: some part of the layout controls were moved to the changeListener to enable the starter page
     }
 

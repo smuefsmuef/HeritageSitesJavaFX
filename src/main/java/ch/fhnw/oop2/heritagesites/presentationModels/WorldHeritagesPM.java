@@ -1,12 +1,10 @@
 package ch.fhnw.oop2.heritagesites.presentationModels;
 
-import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -32,10 +30,8 @@ public class WorldHeritagesPM {
     private static final String csf_file_direct = "/data/heritage_sites.csv";
     private static final String DELIMITER = ";";
 
-
     // proxy to add bind all the views to the same object
     private final HeritagePM heritageProxy = new HeritagePM();
-
 
     public WorldHeritagesPM() throws FileNotFoundException {
         allSites.addAll(readFromFile());
@@ -51,7 +47,6 @@ public class WorldHeritagesPM {
             if (newOne != null) {
                 bindToProxy(newOne);
             }
-
         });
     }
 
@@ -76,7 +71,6 @@ public class WorldHeritagesPM {
         FileReader reader = new FileReader(fileName);
         return new BufferedReader(reader);
     }
-
 
     // save current state of list into csv
     public void save() {
@@ -170,7 +164,7 @@ public class WorldHeritagesPM {
     // save
     public void addSite() {
         allSites.add(0, new HeritagePM(getNextId()));
-       int firstOne = allSites.get(0).getId();
+        int firstOne = allSites.get(0).getId();
         setSelectedHeritageId(firstOne);
         updateCounters();
     }
@@ -248,24 +242,20 @@ public class WorldHeritagesPM {
     //////////////////////////////////////  Table Search  ////////////////////////////////
 
 
-
-
-    public Predicate<HeritagePM> createPredicate(String searchText){
+    public Predicate<HeritagePM> createPredicate(String searchText) {
         return s -> {
             if (searchText == null || searchText.isEmpty()) return true;
             return searchFindsOrder(s, searchText);
         };
     }
 
-
-    private boolean searchFindsOrder(HeritagePM site, String searchText){
+    private boolean searchFindsOrder(HeritagePM site, String searchText) {
         return (site.getSite().toLowerCase().contains(searchText.toLowerCase())) ||
                 (site.getStates().toLowerCase().contains(searchText.toLowerCase())) ||
                 (site.getLocation().toLowerCase().contains(searchText.toLowerCase())) ||
                 (site.getCategory().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(site.getId()).toString().equals(searchText.toLowerCase());
     }
-
 
     public FilteredList<HeritagePM> getFilteredData() {
         return filteredData;
@@ -282,6 +272,8 @@ public class WorldHeritagesPM {
     public void setSortedList(SortedList<HeritagePM> sortedList) {
         this.sortedList = sortedList;
     }
+    
+
     //////////////////////////////////////  Getter & Setter  ////////////////////////////////
 
 
@@ -307,7 +299,6 @@ public class WorldHeritagesPM {
 
     public void setSelectedHeritageId(int selectedHeritageId) {
         this.selectedHeritageId.set(selectedHeritageId);
-
     }
 
     public int getVisitedSites() {
@@ -357,8 +348,6 @@ public class WorldHeritagesPM {
     public void setSitesCounter(int sitesCounter) {
         this.sitesCounter.set(sitesCounter);
     }
-
-
 
 }
 
