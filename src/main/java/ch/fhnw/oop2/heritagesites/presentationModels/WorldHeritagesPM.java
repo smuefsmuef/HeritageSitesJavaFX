@@ -50,9 +50,6 @@ public class WorldHeritagesPM {
                 bindToProxy(newOne);
             }
         });
-
-        setSelectedHeritageId(3); // to start at the top --> maybe change that
-
     }
 
 

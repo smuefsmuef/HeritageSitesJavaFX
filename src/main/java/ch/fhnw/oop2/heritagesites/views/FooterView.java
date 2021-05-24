@@ -12,13 +12,9 @@ public class FooterView extends HBox {
 
     private final WorldHeritagesPM model;
 
-    private Label visitedSites;
     private Label visitedSitesCounter;
-    private Label totalSites;
     private Label siteCounter;
-    private Label visitedCountries;
     private Label countryCounter;
-    private Label visitedCountriesNames;
     private Label countryNameCounter;
 
     public FooterView(WorldHeritagesPM model) {
@@ -37,16 +33,16 @@ public class FooterView extends HBox {
         setPadding(new Insets(5, 5, 5, 10));
         setSpacing(10);
 
-        totalSites = new Label("Sites total: ");
+        Label totalSites = new Label("Sites total: ");
         siteCounter = new Label(" " + model.totalSites());         // to get the init value, note that for the other ones it doesnt matter atm, no stored values in db
 
-        visitedSites = new Label("Sites visited: ");
+        Label visitedSites = new Label("Sites visited: ");
         visitedSitesCounter = new Label(" ");
 
-        visitedCountries = new Label("Countries visited I:");
+        Label visitedCountries = new Label("Countries visited I:");
         countryCounter = new Label("");
 
-        visitedCountriesNames = new Label("Countries visited II:");
+        Label visitedCountriesNames = new Label("Countries visited II:");
         countryNameCounter = new Label("");
 
         getChildren().addAll(totalSites, siteCounter, visitedSites, visitedSitesCounter, visitedCountries, countryCounter, visitedCountriesNames, countryNameCounter);

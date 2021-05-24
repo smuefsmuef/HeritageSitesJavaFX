@@ -52,7 +52,10 @@ public class HeaderView extends HBox {
 
 
         // todo add listener
-        deleteButton.setDisable(true);
+        if(model.getSelectedHeritageId() <0) {
+            deleteButton.setDisable(true);
+
+        }
 
 
         // searchBox.setDisable(true);

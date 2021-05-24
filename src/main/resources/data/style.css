@@ -4,7 +4,6 @@
     -fx-font-family: "Courier New";
 }
 
-
 /* --- HEADER --- */
 
 #top {
@@ -48,23 +47,19 @@
     -fx-background-color: #cada47;
 }
 
-
 /* --- CENTER --- */
 
 SplitView {
     -fx-background-color: linear-gradient(to top, #536976, #BBD2C5);
 }
 
-
 .split-pane:horizontal > .split-pane-divider {
     -fx-background-color: linear-gradient(to bottom, #536976, #BBD2C5);
-
 }
 
 .split-pane-divider {
     -fx-padding: 0.1;
 }
-
 
 /*LEFT*/
 
@@ -75,11 +70,9 @@ SplitView {
     -fx-background-color: transparent;
 }
 
-
 .table-view {
     -fx-background-color: transparent;
 }
-
 
 .table-view .column-header-background .filler {
     -fx-background-color: transparent;
@@ -138,7 +131,6 @@ SplitView {
     -fx-background-color: transparent;
 }
 
-
 .table-view .virtual-flow .scroll-bar:vertical,
 .table-view .virtual-flow .scroll-bar:vertical .track,
 .table-view .virtual-flow .scroll-bar:vertical .track-background,
@@ -152,7 +144,6 @@ SplitView {
 .table-view .virtual-flow .scroll-bar .decrement-button {
     -fx-opacity: 0;
     -fx-padding: 2;
-
 }
 
 /*RIGHT*/
@@ -175,6 +166,22 @@ FormView .text-area {
     -fx-font-weight: bold;
 }
 
+StarterView {
+    /*    -fx-background-image: url("https://www.google.com/images/srpr/logo3w.png");*/
+}
+
+#infoTitle {
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+    -fx-padding: 30, 50, 50, 50;
+}
+
+#infoPetra {
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-padding: 30, 50, 50, 50;
+    -fx-text-background-color: #536976;
+}
 
 
 /* --- BOTTOM --- */

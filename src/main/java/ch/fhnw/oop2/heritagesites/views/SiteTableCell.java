@@ -14,7 +14,7 @@ import java.util.Map;
 public class SiteTableCell extends TableCell<HeritagePM, Boolean> {
     private static final Map<Boolean, Image> YES = new HashMap<>();
     private static final Insets INSETS = new Insets(1, 8, 1, 5);
-    private static final String test = "/data/yes.png";
+    private static final String yes = "/data/yes.png";
 
     @Override
     protected void updateItem(Boolean item, boolean empty) {
@@ -23,7 +23,7 @@ public class SiteTableCell extends TableCell<HeritagePM, Boolean> {
         if (!empty) {
             Image img = YES.get(item);
             if (item.booleanValue() == true) {
-                img = new Image(getClass().getResource(test)
+                img = new Image(getClass().getResource(yes)
                         .toExternalForm(), 18, 18, true, true, true);
                 YES.put(item, img);
             }
