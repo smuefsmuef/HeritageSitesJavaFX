@@ -26,13 +26,14 @@ public class SplitView extends SplitPane {
         // table on the left
         left = new TableVV(model);
 
+        getItems().addAll(left, rightInitialView);
+
         // fyi: some part of the layout controls were moved to the changeListener to enable the starter page
     }
 
 
     private void setupValueChangedListeners() {
         HeritagePM proxy = model.getHeritageProxy();
-        getItems().addAll(left, rightInitialView);
         proxy.idProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue.intValue() == 0) {
                 getItems().addAll(right);

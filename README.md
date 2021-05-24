@@ -100,3 +100,7 @@ If everything went well the folder "src/main/java" should be blue, and "src/test
 -Enabling/Disabling Buttons
 -add new site: set year, set next id
 -edit some table columns, double-click, on enter the value is stored& updated
+-add a startpage that 
+
+Todo: searchbar
+disbale buttons

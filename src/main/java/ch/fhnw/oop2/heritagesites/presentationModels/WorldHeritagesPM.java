@@ -262,7 +262,6 @@ public class WorldHeritagesPM {
 
 
     public FilteredList<HeritagePM> getFilteredData() {
-
         return filteredData;
     }
 

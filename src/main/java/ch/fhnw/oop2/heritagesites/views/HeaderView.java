@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.heritagesites.views;
 
+import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,6 +27,8 @@ public class HeaderView extends HBox {
         layoutControls();
         setupBindings();
         setupEventHandlers();
+        setupValueChangedListeners();
+
     }
 
     private void initializeControls() {
@@ -50,15 +53,8 @@ public class HeaderView extends HBox {
         searchBox.setPrefSize(200, 11);
         searchBox.setId("search-box");
 
-
-        // todo add listener
-        if(model.getSelectedHeritageId() <0) {
-            deleteButton.setDisable(true);
-
-        }
-
-
-        // searchBox.setDisable(true);
+        deleteButton.setDisable(true);
+        saveButton.setDisable(true);
 
         getChildren().addAll(addNewButton, deleteButton, saveButton, searchBox);
 
@@ -80,21 +76,16 @@ public class HeaderView extends HBox {
     private void setupBindings() {
 
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("old is " + oldValue);
-            System.out.println("new is " + newValue);
+            System.out.println("predicate: old is " + oldValue);
+            System.out.println("predicate: new is " + newValue);
 
 
             //todo:
-
-            //       model.getFilteredData().setPredicate( model.createPredicate(newValue));
-
+            model.getFilteredData().setPredicate( model.createPredicate(newValue));
             model.getFilteredData().setPredicate(
-
                     model.createPredicate(newValue));
 
         });
-
-
 // Todo:
 //
 //
@@ -108,6 +99,16 @@ public class HeaderView extends HBox {
 //                }
 
 
+    }
+
+    private void setupValueChangedListeners() {
+        HeritagePM proxy = model.getHeritageProxy();
+        proxy.idProperty().addListener((observable, oldValue, newValue) -> {
+            if (oldValue.intValue() == 0) {
+            deleteButton.setDisable(false);
+            saveButton.setDisable(false);
+            }
+        });
     }
 
 
