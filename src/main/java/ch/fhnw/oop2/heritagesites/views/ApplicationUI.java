@@ -13,7 +13,7 @@ public class ApplicationUI extends BorderPane {
         this.model = model;
         initializeControls();
         layoutControls();
-     }
+    }
 
     private void initializeControls() {
         top = new HeaderView(model);

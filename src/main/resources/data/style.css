@@ -4,37 +4,26 @@
     -fx-font-family: "Courier New";
 }
 
-FormView {
-    -fx-start-margin: 50;
-    -fx-font-size: 10;
-    -fx-grid-lines-visible: false;
-    -fx-background-color: transparent;
-}
 
-FormView .text-area {
-    /*-fx-text-fill: #6f7383;*/
-}
-
-SplitView {
-    -fx-background-color: linear-gradient(to top, #536976, #BBD2C5);
-}
-
+/* --- HEADER --- */
 
 #top {
     -fx-background-color: #BBD2C5;
     -fx-background-position: right center;
 }
 
-#bottom {
-    -fx-background-color: #536976;
-    -fx-font-size: 8;
-}
 
 .button {
     -fx-font-size: 10;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-effect: dropshadow(one-pass-box, #6f9ba3, 2, 0.0, 1, 0);
+}
+
+#search-box {
+    -fx-text-fill: #536976;
+    -fx-margin: 0 50 0 0;
+    -fx-font-size: 10;
 }
 
 #saveButton:hover, #addNewButton:hover, #deleteButton:hover {
@@ -59,6 +48,26 @@ SplitView {
     -fx-background-color: #cada47;
 }
 
+
+/* --- CENTER --- */
+
+SplitView {
+    -fx-background-color: linear-gradient(to top, #536976, #BBD2C5);
+}
+
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: linear-gradient(to bottom, #536976, #BBD2C5);
+
+}
+
+.split-pane-divider {
+    -fx-padding: 0.1;
+}
+
+
+/*LEFT*/
+
 #heritageTable {
     -fx-background-radius: 7px 7px 0px 0px;
     -fx-font-size: 10;
@@ -66,12 +75,6 @@ SplitView {
     -fx-background-color: transparent;
 }
 
-#formTitle {
-    -fx-font-size: 20;
-    -fx-text-fill: #cb4cec;
-    -fx-font-family: "Courier New";
-    -fx-font-weight: bold;
-}
 
 .table-view {
     -fx-background-color: transparent;
@@ -115,9 +118,8 @@ SplitView {
 }
 
 .table-row-cell: selected {
-    -fx-text-background-color: #1b1b49;
     -fx-font-weight: bold;
-
+    -fx-text-background-color: #555a1d;
 }
 
 .table-row-cell: odd {
@@ -153,15 +155,41 @@ SplitView {
 
 }
 
-.split-pane:horizontal > .split-pane-divider {
-    /*-fx-background-color: #bad1c4;*/
-    -fx-background-color: linear-gradient(to bottom, #536976, #BBD2C5);
+/*RIGHT*/
 
+FormView {
+    -fx-start-margin: 50;
+    -fx-font-size: 10;
+    -fx-grid-lines-visible: false;
+    -fx-background-color: transparent;
 }
 
-.split-pane-divider {
-    -fx-padding: 0.1;
+FormView .text-area {
+    /*-fx-text-fill: #6f7383;*/
 }
+
+#formTitle {
+    -fx-font-size: 20;
+    -fx-text-fill: #cb4cec;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+}
+
+
+
+/* --- BOTTOM --- */
+
+FooterView {
+    -fx-background-color: #536976;
+    -fx-font-size: 8;
+    -fx-text-background-color: #cada47;
+}
+
+
+
+
+
+
 
 
 

@@ -2,7 +2,9 @@ package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 public class HeaderView extends HBox {
@@ -13,7 +15,10 @@ public class HeaderView extends HBox {
     private Button deleteButton = new Button("Remove Site");
     private Button saveButton = new Button("Save");
 
-    // https://code.makery.ch/blog/javafx-8-tableview-sorting-filtering/
+
+    // todo: https://edencoding.com/search-bar-dynamic-filtering/
+    private TextField searchBox = new TextField("");
+
 
     public HeaderView(WorldHeritagesPM model) {
         this.model = model;
@@ -42,7 +47,17 @@ public class HeaderView extends HBox {
         saveButton.setPrefSize(100, 15);
         saveButton.setId("saveButton");
 
-        getChildren().addAll(addNewButton, deleteButton, saveButton);
+        searchBox.setPrefSize(200, 11);
+        searchBox.setId("search-box");
+
+
+        // todo add listener
+        deleteButton.setDisable(true);
+
+
+        // searchBox.setDisable(true);
+
+        getChildren().addAll(addNewButton, deleteButton, saveButton, searchBox);
 
     }
 
@@ -56,11 +71,38 @@ public class HeaderView extends HBox {
 
         // save current list
         saveButton.setOnAction(event -> model.save());
-
     }
 
 
     private void setupBindings() {
+
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("old is " + oldValue);
+            System.out.println("new is " + newValue);
+
+
+            //todo:
+
+            //       model.getFilteredData().setPredicate( model.createPredicate(newValue));
+
+            model.getFilteredData().setPredicate(
+
+                    model.createPredicate(newValue));
+
+        });
+
+
+// Todo:
+//
+//
+//
+//                    model.getFilteredData().setPredicate( x -> {
+//                        if (newValue == null || newValue.isEmpty()) {
+//                            return true;
+//                        }
+//                        return false;
+//                    });
+//                }
 
 
     }

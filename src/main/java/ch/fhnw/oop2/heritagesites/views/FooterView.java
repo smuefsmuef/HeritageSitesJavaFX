@@ -37,11 +37,8 @@ public class FooterView extends HBox {
         setPadding(new Insets(5, 5, 5, 10));
         setSpacing(10);
 
-        setId("bottom");
-
         totalSites = new Label("Sites total: ");
-        // ok so, to get the init value, note that for the other ones it doesnt matter atm, no stored values in db
-        siteCounter = new Label(" " + model.getTotalSites());
+        siteCounter = new Label(" " + model.totalSites());         // to get the init value, note that for the other ones it doesnt matter atm, no stored values in db
 
         visitedSites = new Label("Sites visited: ");
         visitedSitesCounter = new Label(" ");

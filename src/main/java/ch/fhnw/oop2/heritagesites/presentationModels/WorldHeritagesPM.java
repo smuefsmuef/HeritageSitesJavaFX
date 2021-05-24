@@ -3,11 +3,13 @@ package ch.fhnw.oop2.heritagesites.presentationModels;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -22,6 +24,7 @@ public class WorldHeritagesPM {
     private final SimpleIntegerProperty sitesCounter = new SimpleIntegerProperty();
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
 
+    FilteredList<HeritagePM> filteredData = new FilteredList<>(FXCollections.observableList(allSites));
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String csf_file_direct = "/data/heritage_sites.csv";
@@ -48,7 +51,7 @@ public class WorldHeritagesPM {
             }
         });
 
-        setSelectedHeritageId(154);
+        setSelectedHeritageId(3); // to start at the top --> maybe change that
 
     }
 
@@ -167,9 +170,9 @@ public class WorldHeritagesPM {
 
     // save
     public void addSite() {
-        allSites.add(new HeritagePM(getNextId()));
-       int lastOne = allSites.get(allSites.size() - 1).getId();
-        setSelectedHeritageId(lastOne);
+        allSites.add(0, new HeritagePM(getNextId()));
+       int firstOne = allSites.get(0).getId();
+        setSelectedHeritageId(firstOne);
         updateCounters();
     }
 
@@ -191,14 +194,14 @@ public class WorldHeritagesPM {
 
 
     public void updateCounters() {
-        getTotalSites();
-        getVisitedSitesCounter();
-        getVisitedCountriesCounter();
-        getVisitedCountriesName();
+        totalSites();
+        visitedSitesCounter();
+        visitedCountriesCounter();
+        visitedCountriesName();
     }
 
     // counter total sites
-    public int getTotalSites() {
+    public int totalSites() {
         int counter = (int) allSites.stream()
                 .count();
         System.out.println("total Sites counter: " + counter);
@@ -207,7 +210,7 @@ public class WorldHeritagesPM {
     }
 
     // counter for visited sites
-    public int getVisitedSitesCounter() {
+    public int visitedSitesCounter() {
         int counter = (int) allSites.stream()
                 .filter(s -> s.isVisited())
                 .count();
@@ -217,7 +220,7 @@ public class WorldHeritagesPM {
     }
 
     // counter for visited countries
-    public int getVisitedCountriesCounter() {
+    public int visitedCountriesCounter() {
         int counter = (int) allSites.stream()
                 .filter(s -> s.isVisited())
                 .map(v -> Arrays.asList(v.getCodeISO().split(",")))
@@ -230,7 +233,7 @@ public class WorldHeritagesPM {
     }
 
     // counter string list all visited countries
-    public String getVisitedCountriesName() {
+    public String visitedCountriesName() {
         String list = allSites.stream()
                 .filter(s -> s.isVisited())
                 .map(v -> Arrays.asList(v.getCodeISO().split(",")))
@@ -240,6 +243,34 @@ public class WorldHeritagesPM {
         System.out.println("list visited countries: " + list);
         setVisitedCountriesNames(list);
         return list;
+    }
+
+
+    //////////////////////////////////////  Table Search  ////////////////////////////////
+
+    public Predicate<HeritagePM> createPredicate(String searchText){
+        return s -> {
+            System.out.println(searchText);
+            if (searchText == null || searchText.isEmpty()) return true;
+            return searchFindsOrder(s, searchText);
+        };
+    }
+
+
+    private boolean searchFindsOrder(HeritagePM site, String searchText){
+        return (site.getSite().toLowerCase().contains(searchText.toLowerCase())) ||
+                (site.getStates().toLowerCase().contains(searchText.toLowerCase())) ||
+                Integer.valueOf(site.getId()).toString().equals(searchText.toLowerCase());
+    }
+
+
+    public FilteredList<HeritagePM> getFilteredData() {
+
+        return filteredData;
+    }
+
+    public void setFilteredData(FilteredList<HeritagePM> filteredData) {
+        this.filteredData = filteredData;
     }
 
 
@@ -319,6 +350,9 @@ public class WorldHeritagesPM {
     public void setSitesCounter(int sitesCounter) {
         this.sitesCounter.set(sitesCounter);
     }
+
+
+
 }
 
 

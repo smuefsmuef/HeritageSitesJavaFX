@@ -8,7 +8,7 @@ public class HeritagePM {
 
     private final StringProperty category = new SimpleStringProperty();
     private final StringProperty dateInscribed = new SimpleStringProperty();
-    private final IntegerProperty  id = new SimpleIntegerProperty();
+    private final IntegerProperty id = new SimpleIntegerProperty();
     private final StringProperty imgageURL = new SimpleStringProperty();
     private final StringProperty codeISO = new SimpleStringProperty();
     private final StringProperty location = new SimpleStringProperty();
@@ -35,7 +35,7 @@ public class HeritagePM {
         setDateInscribed(line[1]);
         setId(Integer.parseInt(line[2]));
         setImgageURL(line[3]);
-        setCodeISO(line[4]);
+        setCodeISO(line[4].toUpperCase());
         setLocation(line[5]);
         setRegion(line[6]);
         setDescription(line[7]);

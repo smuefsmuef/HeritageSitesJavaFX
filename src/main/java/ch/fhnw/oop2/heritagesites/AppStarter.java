@@ -25,19 +25,14 @@ public class AppStarter extends Application {
 
         primaryStage.titleProperty().bind(model.applicationTitleProperty());
 
-        primaryStage.setWidth(800);
-        primaryStage.setHeight(500);
+        primaryStage.setWidth(1100); // just for startup
+        primaryStage.setHeight(600);
 
         primaryStage.setScene(scene);
         primaryStage.show();
 
 
-
-
-
     }
-
-
 
 
 }
