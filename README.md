@@ -1,7 +1,7 @@
 # OOP2 Programming Project 2ICeng/2ICbb FS21 
 
 ## Edited By
-Your Name
+Petra Kohler
 
 ## Handing in
 - Sunday, 01.06.21, 18:00
@@ -65,3 +65,40 @@ Do the following steps:
 - Wait, wait, and wait some more
 
 If everything went well the folder "src/main/java" should be blue, and "src/test/java" should be green.
+
+
+## My Solution: Basics
+- Loading of the data
+    - Saving of Changes
+    - Visualize all HeritageSites in a table/list
+    - Editor-View
+        - Editor-View always works on the selected item from the table
+        - Changes lead to an *immediate* update of the table and the header
+        - Changes of *hasVisited* leads to an immediate update of the Footer elements
+            - Number of Countries Visited
+            - Number of Places visited
+            - List of Countries visited (using abbreviations)
+        - Footer
+            - Number of Countries Visited
+            - Number of Places visited
+            - List of Countries visited
+            - simple styling with CSS
+    - Layout with SplitPane
+    - reasonable Resizing-Management
+    - Creation of a new Heritage Site
+    - Deletion of a Heritage Site
+    - Application-Structure
+        - two Layers for Presentation-Model and View
+      
+## My Solution: Additional Features
+-Consequent use of the PM Concept
+-Styling of Application
+-edit some table columns, double-click, on enter the value is stored& updated
+-Additional Column with Yes-Image, small Tooltip for visited Sites, Update depending on value
+-Searchbar, freetext (from observable list to filtered list to sorted List)
+-Enabling/Disabling Buttons
+-add new site: automatically set year, set next id
+-add a startpage
+
+
+

@@ -1,18 +1,14 @@
 package ch.fhnw.oop2.heritagesites.presentationModels;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
-// heritagePM analog gemeimende
-// todo: seems alsook
+import java.util.Calendar;
 
 public class HeritagePM {
 
     private final StringProperty category = new SimpleStringProperty();
     private final StringProperty dateInscribed = new SimpleStringProperty();
-    private final StringProperty id = new SimpleStringProperty();
+    private final IntegerProperty id = new SimpleIntegerProperty();
     private final StringProperty imgageURL = new SimpleStringProperty();
     private final StringProperty codeISO = new SimpleStringProperty();
     private final StringProperty location = new SimpleStringProperty();
@@ -20,33 +16,53 @@ public class HeritagePM {
     private final StringProperty description = new SimpleStringProperty();
     private final StringProperty site = new SimpleStringProperty();
     private final StringProperty states = new SimpleStringProperty();
+    private final BooleanProperty visited = new SimpleBooleanProperty();
+
+
+    public HeritagePM() { // set some default values to get an empty title in the start of the applciation
+        setSite("");
+        setDateInscribed("");
+    }
+
+    public HeritagePM(int id) { // set some default values to get an empty title in the start of the applciation
+        setSite("New Site");
+        setDateInscribed(getYearAsString());
+        setId(id);
+    }
 
     public HeritagePM(String[] line) {
         setCategory(line[0]);
         setDateInscribed(line[1]);
-        setId(line[2]);
+        setId(Integer.parseInt(line[2]));
         setImgageURL(line[3]);
-        setCodeISO(line[4]);
+        setCodeISO(line[4].toUpperCase());
         setLocation(line[5]);
         setRegion(line[6]);
         setDescription(line[7]);
         setSite(line[8]);
         setStates(line[9]);
+        setVisited(Boolean.parseBoolean("false")); // default wert
     }
 
     public String infoAsLine(String delimiter) {
         return String.join(delimiter,
-                getCategory(), //
+                getCategory(),
                 getDateInscribed(),
-                getId(),
+                Integer.toString(getId()),
                 getImgageURL(),
-                getCodeISO(), //
+                getCodeISO(),
                 getLocation(),
                 getRegion(),
                 getDescription(),
                 getSite(),
-                getStates()
+                getStates(),
+                Boolean.toString(isVisited())
         );
+    }
+
+    public String getYearAsString() {
+        return String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+
     }
 
     // getter & setter
@@ -75,15 +91,15 @@ public class HeritagePM {
         this.dateInscribed.set(dateInscribed);
     }
 
-    public String getId() {
+    public int getId() {
         return id.get();
     }
 
-    public StringProperty idProperty() {
+    public IntegerProperty idProperty() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id.set(id);
     }
 
@@ -170,4 +186,17 @@ public class HeritagePM {
     public void setStates(String states) {
         this.states.set(states);
     }
+
+    public Boolean isVisited() {
+        return visited.get();
+    }
+
+    public BooleanProperty visitedProperty() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited.set(visited);
+    }
+
 }

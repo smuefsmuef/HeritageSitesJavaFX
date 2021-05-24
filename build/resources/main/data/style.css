@@ -1,48 +1,203 @@
-GridPane {
--fx-background-color: #0000ff;
-    -fx-max-height: 20px;
+.root {
+    -fx-base: rgb(184, 203, 66);
+    -fx-background: rgb(225, 228, 203);
+    -fx-font-family: "Courier New";
 }
 
-VBox {
-    -fx-background-color: #f9b288;
-}
-
+/* --- HEADER --- */
 
 #top {
-    -fx-background-color: #456666;
-    -fx-background-image: url("unesco.jpg");
+    -fx-background-color: #BBD2C5;
     -fx-background-position: right center;
-
 }
 
-#bottom {
-    -fx-background-color: #b5e5e5;
-}
 
 .button {
-   -fx-background-color: #fb9964;
-    -fx-font-size: 12;
+    -fx-font-size: 10;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(one-pass-box, #6f9ba3, 2, 0.0, 1, 0);
 }
 
-#addNewButton, #deleteButton {
-    -fx-background-color: #d7ea18;
-    -fx-font-weight: bold;
-    -fx-border-radius: 20;
-    -fx-font-size: 12;
+#search-box {
+    -fx-text-fill: #536976;
+    -fx-margin: 0 50 0 0;
+    -fx-font-size: 10;
 }
+
+#saveButton:hover, #addNewButton:hover, #deleteButton:hover {
+    -fx-background-color: #797179;
+    -fx-text-fill: #c5d1d3
+}
+
+#saveButton:pressed, #addNewButton:pressed, #deleteButton:pressed {
+    -fx-background-color: #dd2fdd;
+    -fx-text-fill: #c5d1d3
+}
+
+#addNewButton {
+    -fx-background-color: #cada47;
+}
+
+#saveButton {
+    -fx-background-color: #cada47;
+}
+
+#deleteButton {
+    -fx-background-color: #cada47;
+}
+
+/* --- CENTER --- */
+
+SplitView {
+    -fx-background-color: linear-gradient(to top, #536976, #BBD2C5);
+}
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-background-color: linear-gradient(to bottom, #536976, #BBD2C5);
+}
+
+.split-pane-divider {
+    -fx-padding: 0.1;
+}
+
+/*LEFT*/
 
 #heritageTable {
-    -fx-border-color: #cc3963;
+    -fx-background-radius: 7px 7px 0px 0px;
     -fx-font-size: 10;
-    -fx-border-width: 2;
-    -fx-border-radius: 2;
-
+    -fx-grid-lines-visible: false;
+    -fx-background-color: transparent;
 }
 
-.table-view .column-header .label ,
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #859b9c;
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label,
 .table-view .column-header-background .filler .label {
-    -fx-background-color: #db64dd;
+    -fx-font-weight: bold;
     -fx-alignment: CENTER-LEFT;
-
+    -fx-padding: 2 0 0 10;
 }
+
+.table-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-row-cell: hover {
+    -fx-background-color: #93f9b911;
+    -fx-text-background-color: #cb4cec;
+}
+
+.table-row-cell: selected {
+    -fx-font-weight: bold;
+    -fx-text-background-color: #555a1d;
+}
+
+.table-row-cell: odd {
+    -fx-background-color: rgba(191, 241, 213, 0.27);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell: even {
+    -fx-background-color: rgba(204, 244, 255, 0.27);
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+/*RIGHT*/
+
+FormView {
+    -fx-start-margin: 50;
+    -fx-font-size: 10;
+    -fx-grid-lines-visible: false;
+    -fx-background-color: transparent;
+}
+
+FormView .text-area {
+    /*-fx-text-fill: #6f7383;*/
+}
+
+#formTitle {
+    -fx-font-size: 20;
+    -fx-text-fill: #cb4cec;
+    -fx-font-family: "Courier New";
+    -fx-font-weight: bold;
+}
+
+StarterView {
+    /*    -fx-background-image: url("https://www.google.com/images/srpr/logo3w.png");*/
+}
+
+#infoTitle {
+    -fx-font-weight: bold;
+    -fx-font-size: 22;
+    -fx-padding: 30, 50, 50, 50;
+}
+
+#infoPetra {
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-padding: 30, 50, 50, 50;
+    -fx-text-background-color: #536976;
+}
+
+
+/* --- BOTTOM --- */
+
+FooterView {
+    -fx-background-color: #536976;
+    -fx-font-size: 8;
+    -fx-text-background-color: #cada47;
+}
+
+
+
+
+
+
+
+
+
 
