@@ -1,12 +1,9 @@
 package ch.fhnw.oop2.heritagesites.views;
 
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
-import com.sun.jdi.Value;
-import javafx.beans.property.IntegerProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.util.converter.NumberStringConverter;
 
 public class FooterView extends HBox {
 

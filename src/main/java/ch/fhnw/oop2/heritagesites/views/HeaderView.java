@@ -3,7 +3,6 @@ package ch.fhnw.oop2.heritagesites.views;
 import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -16,10 +15,7 @@ public class HeaderView extends HBox {
     private Button deleteButton = new Button("Remove Site");
     private Button saveButton = new Button("Save");
 
-
-    // todo: https://edencoding.com/search-bar-dynamic-filtering/
     private TextField searchBox = new TextField("");
-
 
     public HeaderView(WorldHeritagesPM model) {
         this.model = model;
@@ -28,7 +24,6 @@ public class HeaderView extends HBox {
         setupBindings();
         setupEventHandlers();
         setupValueChangedListeners();
-
     }
 
     private void initializeControls() {
@@ -75,40 +70,26 @@ public class HeaderView extends HBox {
 
     private void setupBindings() {
 
-        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("predicate: old is " + oldValue);
-            System.out.println("predicate: new is " + newValue);
-
-
-            //todo:
-            model.getFilteredData().setPredicate( model.createPredicate(newValue));
-            model.getFilteredData().setPredicate(
-                    model.createPredicate(newValue));
-
-        });
-// Todo:
-//
-//
-//
-//                    model.getFilteredData().setPredicate( x -> {
-//                        if (newValue == null || newValue.isEmpty()) {
-//                            return true;
-//                        }
-//                        return false;
-//                    });
-//                }
-
-
     }
 
     private void setupValueChangedListeners() {
         HeritagePM proxy = model.getHeritageProxy();
+
+        // disable buttons until some actions are done
         proxy.idProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue.intValue() == 0) {
             deleteButton.setDisable(false);
             saveButton.setDisable(false);
             }
         });
+
+
+        searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("predicate: new is " + newValue);
+                model.getFilteredData().setPredicate( model.createPredicate(newValue));
+        });
+
+
     }
 
 

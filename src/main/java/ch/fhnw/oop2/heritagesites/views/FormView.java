@@ -7,13 +7,10 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-import java.awt.desktop.SystemSleepEvent;
-
 public class FormView extends GridPane {
     private final WorldHeritagesPM model;
 
     private Label title;
-
     private Label siteLabel;
     private TextField siteField;
     private Label dateInscribedLabel;

@@ -1,5 +1,6 @@
 package ch.fhnw.oop2.heritagesites.presentationModels;
 
+import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,8 +24,7 @@ public class WorldHeritagesPM {
     private final SimpleStringProperty visitedCountriesNames = new SimpleStringProperty();
     private final SimpleIntegerProperty sitesCounter = new SimpleIntegerProperty();
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
-
-    FilteredList<HeritagePM> filteredData = new FilteredList<>(FXCollections.observableList(allSites));
+    public FilteredList<HeritagePM> filteredData = new FilteredList<>(allSites, p -> true);
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String csf_file_direct = "/data/heritage_sites.csv";
@@ -36,11 +36,11 @@ public class WorldHeritagesPM {
 
 
     public WorldHeritagesPM() throws FileNotFoundException {
-        System.out.println(getApplicationTitle());
         allSites.addAll(readFromFile());
 
         selectedHeritageIdProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("recations of the listener" + oldValue);
+            System.out.println("selected heritage, old value: " + oldValue);
+            System.out.println("selected heritage, new value: " + newValue);
             HeritagePM oldOne = getHeritage(oldValue.intValue());
             HeritagePM newOne = getHeritage(newValue.intValue());
             if (oldOne != null) {
@@ -49,6 +49,7 @@ public class WorldHeritagesPM {
             if (newOne != null) {
                 bindToProxy(newOne);
             }
+
         });
     }
 
@@ -111,7 +112,6 @@ public class WorldHeritagesPM {
 
     // getHeritage
     private HeritagePM getHeritage(int id) {
-        System.out.println("id transmitted to pm: " + id);
         return allSites.stream()
                 .filter(site -> site.getId() == id)
                 .findAny()
@@ -245,9 +245,11 @@ public class WorldHeritagesPM {
 
     //////////////////////////////////////  Table Search  ////////////////////////////////
 
+
+
+
     public Predicate<HeritagePM> createPredicate(String searchText){
         return s -> {
-            System.out.println(searchText);
             if (searchText == null || searchText.isEmpty()) return true;
             return searchFindsOrder(s, searchText);
         };
@@ -290,7 +292,6 @@ public class WorldHeritagesPM {
     }
 
     public IntegerProperty selectedHeritageIdProperty() {
-        System.out.println(selectedHeritageId);
         return selectedHeritageId;
     }
 

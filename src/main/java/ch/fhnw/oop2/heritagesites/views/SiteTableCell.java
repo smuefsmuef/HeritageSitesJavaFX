@@ -30,7 +30,7 @@ public class SiteTableCell extends TableCell<HeritagePM, Boolean> {
 
             ImageView imageView = new ImageView(img);
             setGraphic(imageView);
-            setTooltip(new Tooltip("Yes! You visted the site"));
+            setTooltip(new Tooltip("Yes! I visted the site"));
             setAlignment(Pos.CENTER);
             setPadding(INSETS);
         }
