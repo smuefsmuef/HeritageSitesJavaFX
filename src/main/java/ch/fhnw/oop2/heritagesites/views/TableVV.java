@@ -29,14 +29,11 @@ public class TableVV extends VBox {
     }
 
     public void initializeControls() {
-        tableHeritage = initializeTable();
-
-        // tableHeritage.setItems(model.getFilteredData()); // todo fix filtered lis
-
+        TableView<HeritagePM> tableView = new TableView<>(model.getFilteredData());
+        tableHeritage = initializeTable(tableView);
     }
 
-    private TableView<HeritagePM> initializeTable() {
-        TableView<HeritagePM> tableView = new TableView<>(model.getAllSites());
+    private TableView<HeritagePM> initializeTable(TableView<HeritagePM> tableView) {
         tableView.setEditable(true);
 
         TableColumn<HeritagePM, String> name = new TableColumn<>("Name");
@@ -135,11 +132,8 @@ public class TableVV extends VBox {
 
     private void layoutControls() {
         setVgrow(tableHeritage, Priority.ALWAYS);
-
-
         getChildren().addAll(tableHeritage);
         tableHeritage.setId("heritageTable");
-
         setMargin(tableHeritage, new Insets(7));
     }
 
@@ -148,7 +142,6 @@ public class TableVV extends VBox {
     }
 
     private void setupValueChangedListeners() {
-
         tableHeritage.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("new id: " + newValue.getId());
             model.setSelectedHeritageId(newValue.getId());
@@ -158,16 +151,8 @@ public class TableVV extends VBox {
     }
 
     private void setupBindings() {
-
     }
 
-    public TableView<HeritagePM> getTableHeritage() {
-        return tableHeritage;
-    }
-
-    public void setTableHeritage(TableView<HeritagePM> tableHeritage) {
-        this.tableHeritage = tableHeritage;
-    }
 }
 
 
