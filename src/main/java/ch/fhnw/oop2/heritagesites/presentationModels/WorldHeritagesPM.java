@@ -5,6 +5,7 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -25,6 +26,7 @@ public class WorldHeritagesPM {
     private final SimpleIntegerProperty sitesCounter = new SimpleIntegerProperty();
     private final ObservableList<HeritagePM> allSites = FXCollections.observableArrayList();
     public FilteredList<HeritagePM> filteredData = new FilteredList<>(allSites, p -> true);
+    SortedList<HeritagePM> sortedList = new SortedList<>(filteredData);
 
     private static final String csv_file = "src/main/resources/data/heritage_sites.csv";
     private static final String csf_file_direct = "/data/heritage_sites.csv";
@@ -259,6 +261,8 @@ public class WorldHeritagesPM {
     private boolean searchFindsOrder(HeritagePM site, String searchText){
         return (site.getSite().toLowerCase().contains(searchText.toLowerCase())) ||
                 (site.getStates().toLowerCase().contains(searchText.toLowerCase())) ||
+                (site.getLocation().toLowerCase().contains(searchText.toLowerCase())) ||
+                (site.getCategory().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(site.getId()).toString().equals(searchText.toLowerCase());
     }
 
@@ -271,7 +275,13 @@ public class WorldHeritagesPM {
         this.filteredData = filteredData;
     }
 
+    public SortedList<HeritagePM> getSortedList() {
+        return sortedList;
+    }
 
+    public void setSortedList(SortedList<HeritagePM> sortedList) {
+        this.sortedList = sortedList;
+    }
     //////////////////////////////////////  Getter & Setter  ////////////////////////////////
 
 

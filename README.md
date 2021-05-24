@@ -95,8 +95,10 @@ If everything went well the folder "src/main/java" should be blue, and "src/test
 -Styling of Application
 -edit some table columns, double-click, on enter the value is stored& updated
 -Additional Column with Yes-Image, small Tooltip for visited Sites, Update depending on value
--Searchbar, freetext
+-Searchbar, freetext (from observable list to filtered list to sorted List)
 -Enabling/Disabling Buttons
 -add new site: automatically set year, set next id
 -add a startpage
+
+
 

@@ -29,7 +29,7 @@ public class TableVV extends VBox {
     }
 
     public void initializeControls() {
-        TableView<HeritagePM> tableView = new TableView<>(model.getFilteredData());
+        TableView<HeritagePM> tableView = new TableView<>(model.getSortedList());
         tableHeritage = initializeTable(tableView);
     }
 
@@ -57,9 +57,6 @@ public class TableVV extends VBox {
         visited.setCellFactory(param -> new SiteTableCell()); // update Cells
 
         tableView.getColumns().addAll(visited, name, category, country, states);
-
-        // todo: sort table // table needs to be a sorted list
-        tableView.getSortOrder().add(name);
 
 
         // layout of the table
@@ -151,6 +148,8 @@ public class TableVV extends VBox {
     }
 
     private void setupBindings() {
+        model.getSortedList().comparatorProperty().bind(tableHeritage.comparatorProperty());
+
     }
 
 }
