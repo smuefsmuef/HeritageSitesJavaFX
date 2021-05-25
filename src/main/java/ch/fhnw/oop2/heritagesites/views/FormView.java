@@ -35,6 +35,7 @@ public class FormView extends GridPane {
         initializeControls();
         layoutControls();
         setupEventHandlers();
+        setupValueChangedListeners();
         setupBindings();
     }
 
@@ -49,7 +50,6 @@ public class FormView extends GridPane {
         codeISOLabel = new Label("ISO Code");
         imageURLLabel = new Label("Image URL");
         siteField = new TextField();
-        dateInscribedField = new TextField();
         regionField = new TextField();
         codeISOField = new TextField();
         imageURLField = new Hyperlink();
@@ -60,7 +60,7 @@ public class FormView extends GridPane {
         descriptionField = new TextArea();
         statesField = new TextField();
         title = new Label();
-        title.setText("test");
+        title.setText(" ");
     }
     
     private void layoutControls() {
@@ -124,6 +124,20 @@ public class FormView extends GridPane {
 
     private void setupEventHandlers() {
         visitedField.setOnAction(event -> model.updateCounters());
+    }
+
+    private void setupValueChangedListeners() {
+        // validations
+
+        // date inscribed, 4 digits
+        dateInscribedField.focusedProperty().addListener((arg0, oldValue, newValue) -> {
+            if (!newValue) {
+                if(!dateInscribedField.getText().matches("^\\d{4}$")){
+                    dateInscribedField.setText("");
+
+                }
+            }
+        });
     }
 
     private void setupBindings() {

@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -272,7 +273,7 @@ public class WorldHeritagesPM {
     public void setSortedList(SortedList<HeritagePM> sortedList) {
         this.sortedList = sortedList;
     }
-    
+
 
     //////////////////////////////////////  Getter & Setter  ////////////////////////////////
 
