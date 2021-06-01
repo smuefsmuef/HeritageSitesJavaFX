@@ -10,6 +10,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.joining;
@@ -246,16 +247,9 @@ public class WorldHeritagesPM {
     public Predicate<HeritagePM> createPredicate(String searchText) {
         return s -> {
             if (searchText == null || searchText.isEmpty()) return true;
+            System.out.println(searchFindsOrder(s, searchText));
             return searchFindsOrder(s, searchText);
         };
-    }
-
-    private boolean searchFindsOrder(HeritagePM site, String searchText) {
-        return (site.getSite().toLowerCase().contains(searchText.toLowerCase())) ||
-                (site.getStates().toLowerCase().contains(searchText.toLowerCase())) ||
-                (site.getLocation().toLowerCase().contains(searchText.toLowerCase())) ||
-                (site.getCategory().toLowerCase().contains(searchText.toLowerCase())) ||
-                Integer.valueOf(site.getId()).toString().equals(searchText.toLowerCase());
     }
 
     public FilteredList<HeritagePM> getFilteredData() {
@@ -273,6 +267,58 @@ public class WorldHeritagesPM {
     public void setSortedList(SortedList<HeritagePM> sortedList) {
         this.sortedList = sortedList;
     }
+
+
+    public static int costOfSubstitution(char a, char b) {
+        return a == b ? 0 : 1;
+    }
+
+    public static int min(int... numbers) {
+        return Arrays.stream(numbers)
+                .min().orElse(Integer.MAX_VALUE); // adapt
+    }
+
+    static int calculate(String x, String y) {
+        int[][] dp = new int[x.length() + 1][y.length() + 1];
+
+        for (int i = 0; i <= x.length(); i++) {
+            for (int j = 0; j <= y.length(); j++) {
+                if (i == 0) {
+                    dp[i][j] = j;
+                } else if (j == 0) {
+                    dp[i][j] = i;
+                } else {
+                    dp[i][j] = min(dp[i - 1][j - 1]
+                                    + costOfSubstitution(x.charAt(i - 1), y.charAt(j - 1)),
+                            dp[i - 1][j] + 1,
+                            dp[i][j - 1] + 1);
+                }
+            }
+        }
+
+        return dp[x.length()][y.length()];
+    }
+
+    // Contains & Fuzzy Search
+    private boolean searchFindsOrder(HeritagePM site, String searchText) {
+        int distanceSite = calculate(site.getSite().replaceAll("\\s", "").toLowerCase(), searchText.toLowerCase().replaceAll("\\s", ""));
+        int distanceState = calculate(site.getStates().replaceAll("\\s", "").toLowerCase(), searchText.toLowerCase().replaceAll("\\s", ""));
+//        System.out.println("distance: " + distanceSite);
+//        System.out.println("matching site: " + site.getSite());
+
+        Boolean containSearch = (site.getSite().toLowerCase().contains(searchText.toLowerCase())) ||
+                (site.getStates().toLowerCase().contains(searchText.toLowerCase())) ||
+                (site.getLocation().toLowerCase().contains(searchText.toLowerCase())) ||
+                (site.getCategory().toLowerCase().contains(searchText.toLowerCase())) ||
+                Integer.valueOf(site.getId()).toString().equals(searchText.toLowerCase());
+
+        if (distanceState < site.getStates().length()-site.getStates().length()+3 || distanceSite < 7 || containSearch) {
+            // todo for all the rest
+            return true;
+        }
+        return false;
+    }
+
 
 
     //////////////////////////////////////  Getter & Setter  ////////////////////////////////
