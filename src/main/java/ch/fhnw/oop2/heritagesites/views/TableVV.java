@@ -47,11 +47,15 @@ public class TableVV extends VBox {
         states.setCellValueFactory(cell -> cell.getValue().statesProperty());
         states.setCellFactory(TextFieldTableCell.forTableColumn());
 
+        TableColumn<HeritagePM, String> id = new TableColumn<>("ID");
+        id.setCellValueFactory(cell -> cell.getValue().idProperty().asString());
+        id.setCellFactory(TextFieldTableCell.forTableColumn());
+
         TableColumn<HeritagePM, Boolean> visited = new TableColumn<>(" ");
         visited.setCellValueFactory(cell -> cell.getValue().visitedProperty());
         visited.setCellFactory(param -> new SiteTableCell()); // update Cells
 
-        tableView.getColumns().addAll(visited, name, category, country, states);
+        tableView.getColumns().addAll(visited, id, name, category, country, states);
 
         // layout of the table
 
@@ -60,18 +64,20 @@ public class TableVV extends VBox {
         category.setId("category");
         country.setId("country");
         states.setId("states");
+        id.setId("id");
         tableView.setId("tableView");
 
         visited.textProperty().bind(model.visitedSitesProperty().asString());
 
         // bind columnsize to width
-        name.prefWidthProperty().bind(tableView.widthProperty().multiply(0.6));
+        name.prefWidthProperty().bind(tableView.widthProperty().multiply(0.4));
         category.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
         country.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
         states.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
+        id.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
 
         // event handler
-        // edit some table columns: name, Category, Country, State
+        // edit some table columns: Name, Category, Country, State
 
         name.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<HeritagePM, String>>() {

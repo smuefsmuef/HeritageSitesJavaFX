@@ -299,12 +299,12 @@ public class WorldHeritagesPM {
         return dp[x.length()][y.length()];
     }
 
-    // Contains & Fuzzy Search
+    // Contains & Fuzzy Search (only for certain fields, didn't want to check for all of them)
     private boolean searchFindsOrder(HeritagePM site, String searchText) {
         int distanceSite = calculate(site.getSite().replaceAll("\\s", "").toLowerCase(), searchText.toLowerCase().replaceAll("\\s", ""));
         int distanceState = calculate(site.getStates().replaceAll("\\s", "").toLowerCase(), searchText.toLowerCase().replaceAll("\\s", ""));
-//        System.out.println("distance: " + distanceSite);
-//        System.out.println("matching site: " + site.getSite());
+        int toleranceSite = site.getSite().length()-site.getSite().length()+4;
+        int toleranceState = site.getStates().length()-site.getStates().length()+3;
 
         Boolean containSearch = (site.getSite().toLowerCase().contains(searchText.toLowerCase())) ||
                 (site.getStates().toLowerCase().contains(searchText.toLowerCase())) ||
@@ -312,13 +312,11 @@ public class WorldHeritagesPM {
                 (site.getCategory().toLowerCase().contains(searchText.toLowerCase())) ||
                 Integer.valueOf(site.getId()).toString().equals(searchText.toLowerCase());
 
-        if (distanceState < site.getStates().length()-site.getStates().length()+3 || distanceSite < 7 || containSearch) {
-            // todo for all the rest
+        if (distanceState < toleranceSite || distanceSite < toleranceState || containSearch ) {
             return true;
         }
         return false;
     }
-
 
 
     //////////////////////////////////////  Getter & Setter  ////////////////////////////////
