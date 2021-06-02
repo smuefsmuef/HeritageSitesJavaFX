@@ -22,7 +22,8 @@ public class FooterView extends HBox {
 
     private void initializeControls() {
         Label totalSites = new Label("Sites total: ");
-        siteCounter = new Label(" " + model.totalSites());         // to get the init value, note that for the other ones it doesnt matter atm, no stored values in db
+        siteCounter = new Label(" " + model.totalSites());
+        // to get the init value, note that for the other ones it doesnt matter atm, no stored values in db
 
         Label visitedSites = new Label("Sites visited: ");
         visitedSitesCounter = new Label(" ");

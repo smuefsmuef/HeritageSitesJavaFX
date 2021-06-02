@@ -75,7 +75,8 @@ public class HeaderView extends HBox {
                 saveButton.setDisable(false);
             }
         });
-        
+
+        // search bar listener
         searchBox.textProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("predicate: new is " + newValue);
             model.getFilteredData().setPredicate(model.createPredicate(newValue));

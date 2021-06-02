@@ -15,10 +15,6 @@ public class ApplicationUI extends BorderPane {
         layoutControls();
     }
 
-    private void initializeSelf() {
-        // css file in app starter, will be universal for all UI
-    }
-
     private void initializeControls() {
         top = new HeaderView(model);
         split = new SplitView(model);

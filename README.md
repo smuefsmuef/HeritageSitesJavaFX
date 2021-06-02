@@ -94,14 +94,14 @@ If everything went well the folder "src/main/java" should be blue, and "src/test
 -Changes in Table lead to changes in the Editor (doubleclick, and confirm with enter)
 -Simple styling of the whole application using CSS
 -Enabling/Disabling
--Searchbar (Freetext & filtering)  from observable list to filtered list to sorted List)
+-Searchbar (freetext, levinsthein, filtering, sortable)
 
 ## My Solution: Additional Features
 -Consequent use of the PM Concept
 -Styling of Application
 -Additional column with Yes-Image, small Tooltip for visited Sites
--add new site: automatically set year, set next id
--add a startpage: on click it disappears
+-Add new site: automatically set year, set next id
+-Startpage right: on click on the table it disappears
 
 
 
