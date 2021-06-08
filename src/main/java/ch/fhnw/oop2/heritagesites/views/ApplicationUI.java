@@ -15,6 +15,12 @@ public class ApplicationUI extends BorderPane implements ViewMixin {
     }
 
     @Override
+    public void initializeSelf() {
+        String path = this.getClass().getResource("/data/style.css").toExternalForm();
+        getStylesheets().add(path);
+    }
+
+    @Override
     public void initializeControls() {
         top = new HeaderView(model);
         split = new SplitView(model);
