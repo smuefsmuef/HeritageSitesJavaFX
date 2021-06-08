@@ -93,7 +93,7 @@ If everything went well the folder "src/main/java" should be blue, and "src/test
 ## My Solution: Small Feature Package
 -Changes in Table lead to changes in the Editor (doubleclick, and confirm with enter)
 -Simple styling of the whole application using CSS
--Enabling/Disabling
+-Enabling/Disabling Buttons
 -Searchbar (freetext, levinsthein, filtering, sortable)
 
 ## My Solution: Additional Features
@@ -101,7 +101,8 @@ If everything went well the folder "src/main/java" should be blue, and "src/test
 -Styling of Application
 -Additional column with Yes-Image, small Tooltip for visited Sites
 -Add new site: automatically set year, set next id
--Startpage right: on click on the table it disappears
+-Mini Validation of Date Inscribed: Regex to check format of year
+-Startpage right: on click on the table the startpage disappears
 
 
 

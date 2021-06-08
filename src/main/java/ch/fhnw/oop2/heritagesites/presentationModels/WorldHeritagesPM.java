@@ -76,7 +76,7 @@ public class WorldHeritagesPM {
 
     // save current state of list into csv
     public void save() {
-        try (BufferedWriter writer = getWriter(csf_file_direct)) { // todo: i use a different file path to read in, maybe change
+        try (BufferedWriter writer = getWriter(csf_file_direct)) {
             writer.write("Category;Date inscribed;ID;Image URL;Code ISO;Location;Region;Short Description;Site;States;;;;");
             writer.newLine();
             allSites.stream()
@@ -235,7 +235,7 @@ public class WorldHeritagesPM {
                 .flatMap(List::stream)
                 .distinct()
                 .collect(joining(", "));
-        System.out.println("list visited countries: " + list);
+        System.out.println("list visited countries name: " + list);
         setVisitedCountriesNames(list);
         return list;
     }

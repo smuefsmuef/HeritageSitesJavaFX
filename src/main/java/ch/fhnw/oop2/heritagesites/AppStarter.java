@@ -15,9 +15,9 @@ public class AppStarter extends Application {
 
         WorldHeritagesPM model = new WorldHeritagesPM();
 
-        // gerüst Borderpane, darin splitpane und dann je nach seite unterschiedlich
         Parent rootPanel = new ApplicationUI(model);
 
+        // instead of initialize the css file in each UI View, i do it once right here
         String path = this.getClass().getResource("/data/style.css").toExternalForm();
         rootPanel.getStylesheets().add(path);
 

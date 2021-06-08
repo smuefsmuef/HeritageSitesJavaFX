@@ -6,20 +6,19 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 
-public class StarterView extends BorderPane {
+public class StarterView extends BorderPane implements ViewMixin {
     private final WorldHeritagesPM model;
-    String icon = getClass().getResource("/data/info.png").toString();
-    BackgroundImage myBI;
-
+    private String icon = getClass().getResource("/data/info.png").toString();
+    private BackgroundImage myBI;
     private Label petra;
     private Label title;
 
     public StarterView(WorldHeritagesPM model) {
         this.model = model;
-        initializeControls();
-        layoutControls();
+        init();
     }
 
+    @Override
     public void initializeControls() {
         myBI = new BackgroundImage(new Image(icon, 350, 350, false, true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
@@ -29,7 +28,8 @@ public class StarterView extends BorderPane {
         title = new Label("World Heritage Site FX");
     }
 
-    private void layoutControls() {
+    @Override
+    public void layoutControls() {
         title.setId("infoTitle");
         setAlignment(title, Pos.BOTTOM_CENTER);
         setBottom(title);

@@ -4,22 +4,19 @@ import ch.fhnw.oop2.heritagesites.presentationModels.HeritagePM;
 import ch.fhnw.oop2.heritagesites.presentationModels.WorldHeritagesPM;
 import javafx.scene.control.SplitPane;
 
-public class SplitView extends SplitPane {
+public class SplitView extends SplitPane implements ViewMixin{
     private final WorldHeritagesPM model;
-
-    TableVV left;
-    FormView right;
-    StarterView rightInitialView;
-
+    private TableVV left;
+    private FormView right;
+    private StarterView rightInitialView;
 
     public SplitView(WorldHeritagesPM model) {
         this.model = model;
-        initializeControls();
-        layoutControls();
-        setupValueChangedListeners();
+        init();
     }
 
-    private void initializeControls() {
+    @Override
+    public void initializeControls() {
         // table on the right
         rightInitialView = new StarterView(model);
         right = new FormView(model);
@@ -28,13 +25,13 @@ public class SplitView extends SplitPane {
         left = new TableVV(model);
     }
 
-    private void layoutControls() {
+    @Override
+    public void layoutControls() {
         getItems().addAll(left, rightInitialView);
-        // fyi: some part of the layout controls were moved to the changeListener to enable the starter page
     }
 
-
-    private void setupValueChangedListeners() {
+    @Override
+    public void setupValueChangedListeners() {
         HeritagePM proxy = model.getHeritageProxy();
         proxy.idProperty().addListener((observable, oldValue, newValue) -> {
             if (oldValue.intValue() == 0) {

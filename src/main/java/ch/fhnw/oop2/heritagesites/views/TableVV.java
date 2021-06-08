@@ -9,20 +9,17 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
-public class TableVV extends VBox {
+public class TableVV extends VBox implements ViewMixin {
     private final WorldHeritagesPM model;
     private TableView<HeritagePM> tableHeritage;
     private TableView<HeritagePM> tableView;
 
-
     public TableVV(WorldHeritagesPM model) {
         this.model = model;
-        initializeControls();
-        layoutControls();
-        setupValueChangedListeners();
-        setupBindings();
+        init();
     }
 
+    @Override
     public void initializeControls() {
         tableView = new TableView<>(model.getSortedList());
         tableHeritage = initializeTable(tableView);
@@ -57,7 +54,7 @@ public class TableVV extends VBox {
 
         tableView.getColumns().addAll(visited, id, name, category, country, states);
 
-        // layout of the table
+        // layoutControls of the table
 
         // set id's'
         name.setId("name");
@@ -76,7 +73,7 @@ public class TableVV extends VBox {
         states.prefWidthProperty().bind(tableView.widthProperty().multiply(0.2));
         id.prefWidthProperty().bind(tableView.widthProperty().multiply(0.1));
 
-        // event handler
+        // event handler of the table
         // edit some table columns: Name, Category, Country, State
 
         name.setOnEditCommit(
@@ -126,20 +123,23 @@ public class TableVV extends VBox {
         return tableView;
     }
 
-    private void layoutControls() {
+    @Override
+    public void layoutControls() {
         setVgrow(tableHeritage, Priority.ALWAYS);
         getChildren().addAll(tableHeritage);
         tableHeritage.setId("heritageTable");
         setMargin(tableHeritage, new Insets(7));
     }
 
-    private void setupValueChangedListeners() {
+    @Override
+    public void setupValueChangedListeners() {
         tableHeritage.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             model.setSelectedHeritageId(newValue.getId());
         });
     }
 
-    private void setupBindings() {
+    @Override
+    public void setupBindings() {
         model.getSortedList().comparatorProperty().bind(tableHeritage.comparatorProperty());
     }
 

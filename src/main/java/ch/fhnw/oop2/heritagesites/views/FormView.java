@@ -6,9 +6,8 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-public class FormView extends GridPane {
+public class FormView extends GridPane implements ViewMixin {
     private final WorldHeritagesPM model;
-
     private Label title;
     private Label siteLabel;
     private TextField siteField;
@@ -32,13 +31,10 @@ public class FormView extends GridPane {
 
     public FormView(WorldHeritagesPM model) {
         this.model = model;
-        initializeControls();
-        layoutControls();
-        setupEventHandlers();
-        setupValueChangedListeners();
-        setupBindings();
+        init();
     }
 
+    @Override
     public void initializeControls() {
         siteLabel = new Label("Name");
         dateInscribedLabel = new Label("Year Inscribed");
@@ -62,8 +58,9 @@ public class FormView extends GridPane {
         title = new Label();
         title.setText(" ");
     }
-    
-    private void layoutControls() {
+
+    @Override
+    public void layoutControls() {
         setPadding(new Insets(0, 10, 10, 10));
         descriptionField.setId("descriptionField");
 
@@ -122,17 +119,18 @@ public class FormView extends GridPane {
         descriptionField.setWrapText(true);
     }
 
-    private void setupEventHandlers() {
+    @Override
+    public void setupEventHandlers() {
         visitedField.setOnAction(event -> model.updateCounters());
     }
 
-    private void setupValueChangedListeners() {
-        // validations
-
+    @Override
+    public void setupValueChangedListeners() {
+        // mini validation:
         // date inscribed, 4 digits
         dateInscribedField.focusedProperty().addListener((arg0, oldValue, newValue) -> {
             if (!newValue) {
-                if(!dateInscribedField.getText().matches("^\\d{4}$")){
+                if (!dateInscribedField.getText().matches("^\\d{4}$")) {
                     dateInscribedField.setText("");
 
                 }
@@ -140,9 +138,9 @@ public class FormView extends GridPane {
         });
     }
 
-    private void setupBindings() {
+    @Override
+    public void setupBindings() {
         HeritagePM proxy = model.getHeritageProxy();
-
         categoryField.textProperty().bindBidirectional(proxy.categoryProperty());
         dateInscribedField.textProperty().bindBidirectional(proxy.dateInscribedProperty());
         imageURLField.textProperty().bindBidirectional(proxy.imgageURLProperty());

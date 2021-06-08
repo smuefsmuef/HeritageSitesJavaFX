@@ -7,9 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-public class HeaderView extends HBox {
+public class HeaderView extends HBox implements ViewMixin {
     private final WorldHeritagesPM model;
-
     private Button addNewButton;
     private Button deleteButton;
     private Button saveButton;
@@ -17,23 +16,21 @@ public class HeaderView extends HBox {
 
     public HeaderView(WorldHeritagesPM model) {
         this.model = model;
-        initializeControls();
-        layoutControls();
-        setupEventHandlers();
-        setupValueChangedListeners();
+        init();
     }
 
-    private void initializeControls() {
+    @Override
+    public void initializeControls() {
         addNewButton = new Button("Create Site");
         deleteButton = new Button("Remove Site");
         saveButton = new Button("Save");
         searchBox = new TextField("");
     }
 
-    private void layoutControls() {
+    @Override
+    public void layoutControls() {
         setPadding(new Insets(5, 5, 5, 12));
         setSpacing(5);
-
         setId("top");
 
         addNewButton.setPrefSize(100, 15);
@@ -54,7 +51,8 @@ public class HeaderView extends HBox {
         getChildren().addAll(addNewButton, deleteButton, saveButton, searchBox);
     }
 
-    private void setupEventHandlers() {
+    @Override
+    public void setupEventHandlers() {
         // delete site
         deleteButton.setOnAction(event -> model.deleteSite(model.getSelectedHeritageId()));
 
@@ -65,7 +63,8 @@ public class HeaderView extends HBox {
         saveButton.setOnAction(event -> model.save());
     }
 
-    private void setupValueChangedListeners() {
+    @Override
+    public void setupValueChangedListeners() {
         HeritagePM proxy = model.getHeritageProxy();
 
         // disable buttons until some actions are done
