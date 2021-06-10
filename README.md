@@ -3,6 +3,9 @@
 ## Edited By
 Petra Kohler
 
+## Grading
+4.0 (Basic Features) + 1.0 (Presentation Model) + 0.5 (Small Feature Package) + 0.25 (Yes Image) + 0.25 (Validation) = 6.0
+
 ## Handing in
 - Sunday, 01.06.21, 18:00
 - Handing-in happens through a "Push" to the Master-Branch of your GitHub repository.
